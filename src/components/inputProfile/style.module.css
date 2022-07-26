@@ -1,0 +1,11 @@
+.block{
+  display: flex;
+  justify-content: space-between;
+  border: none ;
+  border-bottom: 1px solid #EAEAEA;
+  padding: 10px 0 ;
+}
+.input{
+  border: none;
+  text-align: right;
+}

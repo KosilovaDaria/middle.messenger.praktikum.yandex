@@ -1,0 +1,40 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "first project",
+  "default": "src/index.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "start" : "node ./dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KosilovaDaria/middle.messenger.praktikum.yandex.git"
+  },
+  "targets":{
+    "web": {
+      "context": "browser",
+      "publicUrl": "./",
+      "distDir": "dist"
+    }
+  },
+  "author": "Kosilova DD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KosilovaDaria/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/KosilovaDaria/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "express": "^4.18.1",
+    "parcel": "^2.6.2",
+    "parcel-transformer-hbs": "^1.0.4"
+  },
+  "dependencies": {
+    "@parcel/transformer-css": "^2.6.2",
+    "autoprefixer": "^10.4.7",
+    "handlebars": "^4.7.7",
+    "postcss-modules": "^4.3.1"
+  }
+}
