@@ -10,4 +10,9 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
+  border: none;
+  text-align: center;
+  line-height: 2;
+  background: #3369F3;
+  color: aliceblue;
 }

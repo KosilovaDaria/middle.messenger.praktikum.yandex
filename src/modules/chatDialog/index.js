@@ -1,9 +1,9 @@
 import tpl from './tpl.hbs';
 import avatar from '../../components/avatar';
-import button from '../../components/button';
 import messege from '../../components/messege';
 import * as style from './style.module.css';
 import * as btnStyle from '../../components/button/style.module.css';
+import img from '../../../dist/img/btn_msg.png';
 
 const chatDialog = () => {
 	return tpl({
@@ -18,8 +18,8 @@ const chatDialog = () => {
 		inputBlockClass: style.dialog_input,
 		btnClass: style.button_attach,
 		inputClass: style.messege_input,
-		button: button('button_back', '>', 'button', '', btnStyle.button_round),
-		img: '/assets/img/btn_msg.png'
+		className: btnStyle.button_round,
+		img: img
 	});
 };
 export default chatDialog;

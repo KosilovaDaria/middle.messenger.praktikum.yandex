@@ -1,8 +1,9 @@
 import layout from '../../layout/profile/tpl.hbs';
 import tpl from './tpl.hbs';
-import button from '../../components/button';
 import link from '../../components/link';
 import { profileInfo } from '../../modules/profile/index';
+import avatarprofile from '../../components/avatarProfile';
+
 import * as layoutStyle from '../../layout/profile/style.module.css';
 import * as btnStyle from '../../components/button/style.module.css';
 import * as linkStyle from '../../components/link/style.module.css';
@@ -16,8 +17,12 @@ const editsContent = tpl({
 const ProfilePage = layout({
 	wrapperClass: layoutStyle.wrapper,
 	leftBlockClass: layoutStyle.back_block,
-	button: button('button_back', '<', 'button', 'http://localhost:3000/chat', btnStyle.button_round),
+	className: btnStyle.button_round,
 	rightBlockClass: layoutStyle.profile_block,
+	avatar: avatarprofile('file', 'file', 'file'),
+	displayname: 'Иван',
+	displayNameClass: layoutStyle.display_name,
+	formClass: layoutStyle.profile_info,
 	content: profileInfo,
 	controls: editsContent
 });

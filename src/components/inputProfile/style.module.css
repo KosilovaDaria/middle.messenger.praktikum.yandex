@@ -1,9 +1,18 @@
-.block{
+.block, .block_extra{
+  width: 100%;
   display: flex;
   justify-content: space-between;
   border: none ;
   border-bottom: 1px solid #EAEAEA;
   padding: 10px 0 ;
+}
+.block:nth-child(6n) {
+  margin-bottom: 60px;
+  border-bottom: none;
+}
+.block_extra:nth-child(3n) {
+  margin-bottom: 60px;
+  border-bottom: none;
 }
 .input{
   border: none;

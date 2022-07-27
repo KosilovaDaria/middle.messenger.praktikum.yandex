@@ -15,14 +15,15 @@ const pageContent = tpl({
 	inptpassrpt: input('password', 'password', 'Пароль (еще раз)'),
 });
 const SignUpPage = layout({
-	formClass: style.form,
-	inputGroupClass: style.input_group,
 	wrapperClass: style.wrapper,
 	blockClass: style.block,
 	titleClass: style.title,
+	formClass: style.form,
+	action: 'http://localhost:3000/login',
+	inputGroupClass: style.input_group,
 	title: 'Регистрация',
 	content: pageContent,
-	button: button('signup_button', 'Зарегистрироваться'),
+	button: button('signup_button', 'Зарегистрироваться','submit',),
 	link: link('Войти', 'http://localhost:3000/login')
 });
 export default SignUpPage;

@@ -15,10 +15,11 @@ const LoginPage = layout({
   blockClass: style.block,
   titleClass: style.title,
   formClass: style.form,
+  action: 'http://localhost:3000/chat',
   inputGroupClass: style.input_group,
   title: 'Вход',
   content: pageContent,
-  button: button('login_button', 'Авторизоваться', 'submit', 'http://localhost:3000/chat'),
+  button: button('login_button', 'Авторизоваться', 'submit'),
   link: link('Нет аккаунта?', 'http://localhost:3000/signup')
 });
 
