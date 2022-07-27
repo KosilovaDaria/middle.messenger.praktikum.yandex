@@ -41,7 +41,7 @@ const list = [
 ];
 
 const chatList = () => {
-	const listItem = list.map(item => {
+	let listItem = list.map(item => {
 		return tpl({
 			itemClass: style.list_item,
 			avatar: avatar('avatar_chat'),
@@ -54,6 +54,7 @@ const chatList = () => {
 			time: item.time
 		});
 	});
+	listItem = listItem.join(' ');
 	return listItem;
 };
 

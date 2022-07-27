@@ -13738,7 +13738,7 @@ const list = [
     }
 ];
 const chatList = ()=>{
-    const listItem = list.map((item)=>{
+    let listItem = list.map((item)=>{
         return (0, _tplHbsDefault.default)({
             itemClass: _styleModuleCss.list_item,
             avatar: (0, _avatarDefault.default)("avatar_chat"),
@@ -13751,6 +13751,7 @@ const chatList = ()=>{
             time: item.time
         });
     });
+    listItem = listItem.join(" ");
     return listItem;
 };
 exports.default = chatList;
