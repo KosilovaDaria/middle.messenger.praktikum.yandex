@@ -1,9 +1,7 @@
 import layout from '../../layout/profile/tpl.hbs';
 import tpl from './tpl.hbs';
 import link from '../../components/link';
-import { profileInfo } from '../../modules/profile/index';
-import avatarprofile from '../../components/avatarProfile';
-
+import {profileInfo} from '../../modules/profile/index';
 import * as layoutStyle from '../../layout/profile/style.module.css';
 import * as btnStyle from '../../components/button/style.module.css';
 import * as linkStyle from '../../components/link/style.module.css';
@@ -19,10 +17,6 @@ const ProfilePage = layout({
 	leftBlockClass: layoutStyle.back_block,
 	className: btnStyle.button_round,
 	rightBlockClass: layoutStyle.profile_block,
-	avatar: avatarprofile('file', 'file', 'file'),
-	displayname: 'Иван',
-	displayNameClass: layoutStyle.display_name,
-	formClass: layoutStyle.profile_info,
 	content: profileInfo,
 	controls: editsContent
 });
