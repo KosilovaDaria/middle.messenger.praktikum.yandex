@@ -1,0 +1,16 @@
+.block{
+  display: flex;
+  flex-direction: column;
+  border: none ;
+  padding: 10px 0 ;
+}
+.input{
+  visibility: hidden;
+}
+.label {
+  border-radius: 50%;
+  background: #EFEFEF;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto;
+}

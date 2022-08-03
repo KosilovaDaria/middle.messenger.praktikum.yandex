@@ -1,0 +1,18 @@
+.button{
+  width: 280px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: #3369F3;
+  color: aliceblue;
+}
+.button_round {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  text-align: center;
+  line-height: 2;
+  background: #3369F3;
+  color: aliceblue;
+}
