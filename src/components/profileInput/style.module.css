@@ -1,5 +1,6 @@
 .block, .block_extra{
-  width: 100%;
+  /* width: 100%; */
+  width: 510px;
   display: flex;
   justify-content: space-between;
   border: none ;
@@ -14,7 +15,7 @@
   margin-bottom: 60px;
   border-bottom: none;
 }
-.input{
+.input_profile{
   border: none;
   text-align: right;
 }

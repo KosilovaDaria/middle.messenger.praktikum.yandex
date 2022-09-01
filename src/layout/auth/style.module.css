@@ -26,6 +26,8 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.input_group{
-  margin-bottom: 40px;
+.link_block > a {
+  text-decoration: none;
+  display: block;
+  font-size: 12px;
 }

@@ -5,3 +5,7 @@
   height: 40px;
   margin-bottom: 10px;
 }
+.input_profile{
+  border: none;
+  text-align: right;
+}

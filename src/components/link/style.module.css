@@ -1,15 +1,17 @@
 .link_block {
   padding: 10px 0;
+  color: #3369F3;
 }
-.link_block > a {
+/* .link_block > a {
   text-decoration: none;
   display: block;
   font-size: 12px;
-}
+} */
 .link_controls{
   width: 100%;
   color: #3369F3;
   border-bottom: 1px solid #EAEAEA;
+  padding:10px 0;
 }
 .link_controls:nth-child(3n){
   color: red;
