@@ -1,5 +1,4 @@
 .block, .block_extra{
-  /* width: 100%; */
   width: 510px;
   display: flex;
   justify-content: space-between;
@@ -7,11 +6,11 @@
   border-bottom: 1px solid #EAEAEA;
   padding: 10px 0 ;
 }
-.block:nth-child(6n) {
+.block:nth-child(11n) {
   margin-bottom: 60px;
   border-bottom: none;
 }
-.block_extra:nth-child(3n) {
+.block_extra:nth-child(5n) {
   margin-bottom: 60px;
   border-bottom: none;
 }

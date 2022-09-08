@@ -3,6 +3,7 @@ import SignupPage from './pages/signupPage/index';
 import ProfilePage from './pages/profilePage/index';
 import SettingsPage from './pages/settingsPage/index';
 import PassPage from './pages/passPage';
+import ChatPage from './pages/chatPage';
 import {ErrorPage,ServerErrorPage } from './pages/ErrorPage';
 import { render } from "./utils/render";
 
@@ -13,7 +14,7 @@ const routes = {
   '/profile': ProfilePage,
   '/settings': SettingsPage,
   '/pass': PassPage,
-  // '/chat': ChatPage,
+  '/chat': ChatPage,
   '/404': ErrorPage,
   '/500': ServerErrorPage
 };

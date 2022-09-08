@@ -1,15 +1,16 @@
-import Button from "../../components/button/Button";
+import Form from "../../components/form/Form";
+import ProfileInput from "../../components/profileInput/ProfileInput";
 import Input from "../../components/input/Input";
+import Link from "../../components/link/Link";
+import Button from "../../components/button/Button";
 import ProfileLayout from "../../layout/profile/profileLayout";
 import AvatarProfile from "../../components/avatarProfile/AvatarProfile";
-import ProfileForm from "../../components/profile/ProfileForm";
-import ProfileInput from "../../components/profileInput/ProfileInput";
-import Link from "../../components/link/Link";
+import { isValid, showMessage, hideMessage, formValidation } from '../../utils/Validation';
 
+import * as styleForm from '../../components/form/style.module.css';
 import * as styleInput from '../../components/input/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
-import * as styleProfile from '../../components/profile/style.module.css';
 import * as styleLayout from '../../layout/profile/style.module.css';
 
 const button = new Button({
@@ -18,18 +19,11 @@ const button = new Button({
     class: styleButton.button,
     type: 'submit',
   },
-  events: {
-    click: (e) => {
-      console.log('Новые данные о пользователе сохранены');
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }
 });
 
-const profileForm = new ProfileForm('form', {
+const settingsForm = new Form('form', {
   attr: {
-    class: styleProfile.profile_info
+    class: styleForm.profile_info
   },
   inputEmail: new ProfileInput('div', {
     attr: {
@@ -38,8 +32,8 @@ const profileForm = new ProfileForm('form', {
     label: 'Почта',
     input: new Input('input', {
       events: {
-        focus: (e) => console.log('focus валидация'),
-        blur: (e) => console.log('blur валидация'),
+        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
       },
       attr: {
         placeholder: 'pochta@yandex.ru',
@@ -56,8 +50,8 @@ const profileForm = new ProfileForm('form', {
     label: 'Логин',
     input: new Input('input', {
       events: {
-        focus: (e) => console.log('focus валидация'),
-        blur: (e) => console.log('blur валидация'),
+        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
       },
       attr: {
         placeholder: 'ivanivanov',
@@ -74,12 +68,12 @@ const profileForm = new ProfileForm('form', {
     label: 'Имя',
     input: new Input('input', {
       events: {
-        focus: (e) => console.log('focus валидация'),
-        blur: (e) => console.log('blur валидация'),
+        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
       },
       attr: {
         placeholder: 'Иван',
-        name: 'firstname',
+        name: 'first_name',
         class: styleInput.input_profile,
         type: 'text',
       }
@@ -92,12 +86,12 @@ const profileForm = new ProfileForm('form', {
     label: 'Фамилия',
     input: new Input('input', {
       events: {
-        focus: (e) => console.log('focus валидация'),
-        blur: (e) => console.log('blur валидация'),
+        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
       },
       attr: {
         placeholder: 'Иванов',
-        name: 'secondname',
+        name: 'second_name',
         class: styleInput.input_profile,
         type: 'text',
       }
@@ -109,10 +103,6 @@ const profileForm = new ProfileForm('form', {
     },
     label: 'Имя в чате',
     input: new Input('input', {
-      events: {
-        focus: (e) => console.log('focus валидация'),
-        blur: (e) => console.log('blur валидация'),
-      },
       attr: {
         placeholder: 'Иван',
         name: 'displayname',
@@ -128,8 +118,8 @@ const profileForm = new ProfileForm('form', {
     label: 'Телефон',
     input: new Input('input', {
       events: {
-        focus: (e) => console.log('focus валидация'),
-        blur: (e) => console.log('blur валидация'),
+        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
       },
       attr: {
         placeholder: '+7 (909) 967 30 30',
@@ -140,7 +130,13 @@ const profileForm = new ProfileForm('form', {
     })
   }),
   button: button,
-
+  events: {
+    submit: (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      console.log(formValidation(e.target))
+    }
+  }
 });
 
 const SettingsPage = new ProfileLayout('div', {
@@ -148,7 +144,7 @@ const SettingsPage = new ProfileLayout('div', {
     class: styleLayout.wrapper
   },
   avatar: new AvatarProfile({}),
-  profileForm: profileForm,
+  form: settingsForm,
   link: new Link('a', {
     label: '<',
     attr: {

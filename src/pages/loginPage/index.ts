@@ -1,12 +1,14 @@
-import Button from "../../components/button/Button";
 import Form from "../../components/form/Form";
 import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
 import Link from "../../components/link/Link";
 import AuthLayout from "../../layout/auth/authLayout";
-import * as styleLayout from '../../layout/auth/style.module.css';
-import * as styleButton from '../../components/button/style.module.css';
+import { isValid, showMessage, hideMessage, formValidation } from '../../utils/Validation';
+
 import * as styleInput from '../../components/input/style.module.css';
+import * as styleButton from '../../components/button/style.module.css';
 import * as styleLink from '../../components/link/style.module.css';
+import * as styleLayout from '../../layout/auth/style.module.css';
 
 const button = new Button({
   label: 'Авторизоваться',
@@ -14,13 +16,6 @@ const button = new Button({
     class: styleButton.button,
     type: 'submit',
   },
-  events: {
-    click: (e) => {
-      console.log('Авторизация');
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }
 })
 
 const link = new Link('a', {
@@ -33,7 +28,8 @@ const link = new Link('a', {
 
 const form = new Form('form', {
   attr: {
-    class: styleLayout.form
+    class: styleLayout.form,
+    name: 'formLogin'
   },
   inputLogin: new Input('input', {
     attr: {
@@ -41,7 +37,11 @@ const form = new Form('form', {
       name: 'login',
       class: styleInput.input,
       type: 'text',
-    }
+    },
+    events: {
+      focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+      blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+    },
   }),
   inputPass: new Input('input', {
     attr: {
@@ -49,9 +49,20 @@ const form = new Form('form', {
       name: 'password',
       class: styleInput.input,
       type: 'password',
-    }
+    },
+    events: {
+      focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+      blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+    },
   }),
   button: button,
+  events: {
+    submit: (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      console.log(formValidation(e.target))
+    }
+  }
 });
 
 const LoginPage = new AuthLayout('div', {

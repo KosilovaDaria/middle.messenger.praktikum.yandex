@@ -4,6 +4,11 @@
   width: 100%;
   height: 40px;
   margin-bottom: 10px;
+  background-color: 'none';
+}
+.input::selection  {
+  background-color: 'none';
+
 }
 .input_profile{
   border: none;

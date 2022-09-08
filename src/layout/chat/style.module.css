@@ -38,6 +38,13 @@ font-size: 12px;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
 }
-
+.messege_input {
+  flex-grow: 1;
+  min-height: 32px;
+  border-radius: 20px;
+  border: none;
+  background: #EFEFEF;
+  padding: 0 20px;
+  margin: 0 10px;
+}

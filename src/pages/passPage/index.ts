@@ -1,16 +1,17 @@
-import Button from "../../components/button/Button";
-import Input from "../../components/input/Input";
-import ProfileLayout from "../../layout/profile/profileLayout";
-import Avatar from "../../components/avatar";
-import ProfileForm from "../../components/profile/ProfileForm";
+import Form from "../../components/form/Form";
 import ProfileInput from "../../components/profileInput/ProfileInput";
+import Input from "../../components/input/Input";
 import Link from "../../components/link/Link";
+import Avatar from "../../components/avatar";
+import Button from "../../components/button/Button";
+import ProfileLayout from "../../layout/profile/profileLayout";
+import { isValid, showMessage, hideMessage, formValidation } from '../../utils/Validation';
 
-import * as styleInput from '../../components/input/style.module.css';
+import * as styleForm from '../../components/form/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
-import * as styleButton from '../../components/button/style.module.css';
+import * as styleInput from '../../components/input/style.module.css';
 import * as styleAvatar from '../../components/avatar/style.module.css';
-import * as styleProfile from '../../components/profile/style.module.css';
+import * as styleButton from '../../components/button/style.module.css';
 import * as styleLayout from '../../layout/profile/style.module.css';
 
 const button = new Button({
@@ -19,13 +20,6 @@ const button = new Button({
     class: styleButton.button,
     type: 'submit',
   },
-  events: {
-    click: (e) => {
-      console.log('Данные о новом пароле сохранены');
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }
 });
 
 const avatar = new Avatar('div', {
@@ -34,9 +28,9 @@ const avatar = new Avatar('div', {
   }
 });
 
-const profileForm = new ProfileForm('form', {
+const passForm = new Form('form', {
   attr: {
-    class: styleProfile.profile_info
+    class: styleForm.profile_info
   },
   inputOldPass: new ProfileInput('div', {
     attr: {
@@ -44,10 +38,6 @@ const profileForm = new ProfileForm('form', {
     },
     label: 'Старый пароль',
     input: new Input('input', {
-      events: {
-        focus: (e) => console.log('focus валидация'),
-        blur: (e) => console.log('blur валидация'),
-      },
       attr: {
         placeholder: '*****',
         name: 'password',
@@ -56,15 +46,15 @@ const profileForm = new ProfileForm('form', {
       }
     })
   }),
-  inputNewPass: new ProfileInput('div', {
+  inputPass: new ProfileInput('div', {
     attr: {
       class: styleInputProfile.block_extra
     },
     label: 'Новый пароль',
     input: new Input('input', {
       events: {
-        focus: (e) => console.log('focus валидация'),
-        blur: (e) => console.log('blur валидация'),
+        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
       },
       attr: {
         placeholder: '*******',
@@ -74,25 +64,32 @@ const profileForm = new ProfileForm('form', {
       }
     })
   }),
-  inputNewPassRpt: new ProfileInput('div', {
+  inputPassRpt: new ProfileInput('div', {
     attr: {
       class: styleInputProfile.block_extra
     },
     label: 'Повторите новый пароль',
     input: new Input('input', {
       events: {
-        focus: (e) => console.log('focus валидация'),
-        blur: (e) => console.log('blur валидация'),
+        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
       },
       attr: {
         placeholder: '*******',
-        name: 'password',
+        name: 'passwordrpt',
         class: styleInput.input_profile,
         type: 'password',
       }
     })
   }),
   button: button,
+  events: {
+    submit: (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      console.log(formValidation(e.target))
+    }
+  }
 });
 
 const PassPage = new ProfileLayout('div', {
@@ -100,7 +97,7 @@ const PassPage = new ProfileLayout('div', {
     class: styleLayout.wrapper
   },
   avatar: avatar,
-  profileForm: profileForm,
+  form: passForm,
   link: new Link('a', {
     label: '<',
     attr: {

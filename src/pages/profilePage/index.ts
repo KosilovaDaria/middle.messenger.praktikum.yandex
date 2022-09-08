@@ -1,38 +1,34 @@
+import ProfileLayout from "../../layout/profile/profileLayout";
+import Form from "../../components/form/Form";
+import ProfileInput from "../../components/profileInput/ProfileInput";
 import Input from "../../components/input/Input";
 import Link from "../../components/link/Link";
-import ProfileLayout from "../../layout/profile/profileLayout";
 import Avatar from "../../components/avatar";
-import ProfileForm from "../../components/profile/ProfileForm";
-import ProfileInput from "../../components/profileInput/ProfileInput";
 
-import * as styleInput from '../../components/input/style.module.css';
+import * as styleForm from '../../components/form/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
+import * as styleInput from '../../components/input/style.module.css';
 import * as styleLink from '../../components/link/style.module.css';
 import * as styleAvatar from '../../components/avatar/style.module.css';
-import * as styleProfile from '../../components/profile/style.module.css';
-import * as styleLayout from '../../layout/profile/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
+import * as styleLayout from '../../layout/profile/style.module.css';
 
 const avatar = new Avatar('div', {
   attr: {
     class: styleAvatar.avatar_profile,
   }
 });
-
-const profileForm = new ProfileForm('form', {
+const profileForm = new Form('form', {
   attr: {
-    class: styleProfile.profile_info
+    class: styleForm.profile_info
   },
+  
   inputEmail: new ProfileInput('div', {
     attr: {
       class: styleInputProfile.block
     },
     label: 'Почта',
     input: new Input('input', {
-      events: {
-        focus: (e) => console.log(e + 'focus валидация'),
-        blur: (e) => console.log(e + 'blur валидация'),
-      },
       attr: {
         disabled: 'disabled',
         placeholder: 'pochta@yandex.ru',
@@ -48,10 +44,6 @@ const profileForm = new ProfileForm('form', {
     },
     label: 'Логин',
     input: new Input('input', {
-      events: {
-        focus: (e) => console.log(e + 'focus валидация'),
-        blur: (e) => console.log(e + 'blur валидация'),
-      },
       attr: {
         disabled: 'disabled',
         placeholder: 'ivanivanov',
@@ -67,14 +59,10 @@ const profileForm = new ProfileForm('form', {
     },
     label: 'Имя',
     input: new Input('input', {
-      events: {
-        focus: (e) => console.log(e + 'focus валидация'),
-        blur: (e) => console.log(e + 'blur валидация'),
-      },
       attr: {
         disabled: 'disabled',
         placeholder: 'Иван',
-        name: 'firstname',
+        name: 'first_name',
         class: styleInput.input_profile,
         type: 'text',
       }
@@ -86,14 +74,10 @@ const profileForm = new ProfileForm('form', {
     },
     label: 'Фамилия',
     input: new Input('input', {
-      events: {
-        focus: (e) => console.log(e + 'focus валидация'),
-        blur: (e) => console.log(e + 'blur валидация'),
-      },
       attr: {
         disabled: 'disabled',
         placeholder: 'Иванов',
-        name: 'secondname',
+        name: 'second_name',
         class: styleInput.input_profile,
         type: 'text',
       }
@@ -105,10 +89,6 @@ const profileForm = new ProfileForm('form', {
     },
     label: 'Имя в чате',
     input: new Input('input', {
-      events: {
-        focus: (e) => console.log(e + 'focus валидация'),
-        blur: (e) => console.log(e + 'blur валидация'),
-      },
       attr: {
         disabled: 'disabled',
         placeholder: 'Иван',
@@ -124,10 +104,6 @@ const profileForm = new ProfileForm('form', {
     },
     label: 'Телефон',
     input: new Input('input', {
-      events: {
-        focus: (e) => console.log(e + 'focus валидация'),
-        blur: (e) => console.log(e + 'blur валидация'),
-      },
       attr: {
         disabled: 'disabled',
         placeholder: '+7 (909) 967 30 30',
@@ -152,7 +128,7 @@ const ProfilePage = new ProfileLayout('div', {
   }),
   avatar: avatar,
   displayname: 'Иван',
-  profileForm: profileForm,
+  form: profileForm,
   changeData: new Link('a', {
     label: 'Изменить данные',
     attr: {
