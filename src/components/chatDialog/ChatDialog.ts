@@ -6,7 +6,7 @@ import attachBtn from '../../../dist/img/attachBtn.png';
 export default class ChatDialog extends Block {
   render() {
     return this.compile(tpl, {
-      ...this.props, headerClass: styles.dialog_header, infoClass: styles.dialog_info, toolsClass: styles.header_tools, containerClass: styles.dialog_container, dateClass: styles.dialog_date, inputBlockClass: styles.dialog_input, inputClass: styles.messege_input, btnClass: styles.button_attach, img: attachBtn
+      ...this.props, headerClass: styles.dialog_header, infoClass: styles.dialog_info, toolsClass: styles.header_tools, containerClass: styles.dialog_container, dateClass: styles.dialog_date, inputBlockClass: styles.dialog_input, btnClass: styles.button_attach, img: attachBtn
     });
   }
 }

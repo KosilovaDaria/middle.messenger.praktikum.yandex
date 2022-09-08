@@ -159,6 +159,25 @@ main {
   margin: 10px 0;
 }
 
+._4saoZa_block, ._4saoZa_block_extra {
+  width: 510px;
+  border: none;
+  border-bottom: 1px solid #eaeaea;
+  justify-content: space-between;
+  padding: 10px 0;
+  display: flex;
+}
+
+._4saoZa_block:nth-child(11n), ._4saoZa_block_extra:nth-child(5n) {
+  border-bottom: none;
+  margin-bottom: 60px;
+}
+
+._4saoZa_input_profile {
+  text-align: right;
+  border: none;
+}
+
 .Cw4Uoa_avatar, .Cw4Uoa_avatar_profile, .Cw4Uoa_avatar_chat, .Cw4Uoa_avatar_dialog {
   width: 50px;
   height: 50px;
@@ -181,25 +200,6 @@ main {
 .Cw4Uoa_avatar_dialog {
   width: 34px;
   height: 34px;
-}
-
-._4saoZa_block, ._4saoZa_block_extra {
-  width: 510px;
-  border: none;
-  border-bottom: 1px solid #eaeaea;
-  justify-content: space-between;
-  padding: 10px 0;
-  display: flex;
-}
-
-._4saoZa_block:nth-child(11n), ._4saoZa_block_extra:nth-child(5n) {
-  border-bottom: none;
-  margin-bottom: 60px;
-}
-
-._4saoZa_input_profile {
-  text-align: right;
-  border: none;
 }
 
 .AggDcq_input {
