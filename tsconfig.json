@@ -11,6 +11,7 @@
     "strictPropertyInitialization": true,
     "sourceMap": true,
     "noPropertyAccessFromIndexSignature": true,
+    "noUnusedParameters": true,
 
   }
 }
