@@ -1,20 +1,24 @@
-.block, .block_extra{
+.block,
+.block_extra {
   width: 510px;
   display: flex;
   justify-content: space-between;
-  border: none ;
-  border-bottom: 1px solid #EAEAEA;
-  padding: 10px 0 ;
+  border: none;
+  border-bottom: 1px solid #eaeaea;
+  padding: 10px 0;
 }
+
 .block:nth-child(11n) {
   margin-bottom: 60px;
   border-bottom: none;
 }
+
 .block_extra:nth-child(5n) {
   margin-bottom: 60px;
   border-bottom: none;
 }
-.input_profile{
+
+.input_profile {
   border: none;
   text-align: right;
 }

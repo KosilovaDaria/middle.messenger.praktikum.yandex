@@ -1,0 +1,15 @@
+root = true
+
+# Для всех файлов используем unix-совместимые переносы строк
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# отступы в 2 пробела
+[*.py]
+indent_style = space
+indent_size = 2
+
+# Используем табы для отступов (Не указываем размер)
+[*.js]
+indent_style = tab

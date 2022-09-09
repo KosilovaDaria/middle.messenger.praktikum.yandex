@@ -1,4 +1,4 @@
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 import tpl from './tpl.hbs';
 import * as styles from './style.module.css';
 

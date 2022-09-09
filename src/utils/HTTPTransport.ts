@@ -3,8 +3,8 @@ enum METHOD {
   POST = 'POST',
   PUT = 'PUT',
   PATCH = 'PATCH',
-  DELETE = 'DELETE'
-};
+  DELETE = 'DELETE',
+}
 
 type Options = {
   method: METHOD;
@@ -20,32 +20,22 @@ function queryStringify(data: Record<string, string | number>) {
   const keys = Object.keys(data);
   const values = Object.values(data);
   keys.forEach((key, i) => {
-    string += key + '=' + values[i].toString();
+    string += `${key}=${values[i].toString()}`;
     if (i + 1 !== values.length) string += '&'
   })
   return string;
 }
 
 export default class HTTPTransport {
-  get = (url: string, options: OptionsWithoutMethod  = {}) => {
-    return this.request(url, { ...options, method: METHOD.GET }, options.timeout);
-  };
-  post = (url: string, options: OptionsWithoutMethod  = {}) => {
-    return this.request(url, { ...options, method: METHOD.POST }, options.timeout);
-  };
-  put = (url: string, options: OptionsWithoutMethod  = {}) => {
-    return this.request(url, { ...options, method: METHOD.PUT }, options.timeout);
-  };
-  delete = (url: string, options: OptionsWithoutMethod  = {}) => {
-    return this.request(url, { ...options, method: METHOD.DELETE }, options.timeout);
-  };
+  get = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.GET }, options.timeout);
+  post = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.POST }, options.timeout);
+  put = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.PUT }, options.timeout);
+  delete = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.DELETE }, options.timeout);
 
   request = (url: string, options: Options, timeout: number = 5000): Promise<XMLHttpRequest> => {
-
     const { headers = {}, data = {}, method } = options;
 
     return new Promise((resolve, reject) => {
-
       const xhr = new XMLHttpRequest();
 
       xhr.ontimeout = function () {
@@ -68,7 +58,7 @@ export default class HTTPTransport {
         resolve(xhr);
       };
 
-      const handleError = err => {
+      const handleError = (err: any) => {
         console.log('handleError')
         reject(err);
       };
@@ -83,6 +73,5 @@ export default class HTTPTransport {
         xhr.send(JSON.stringify(data));
       }
     });
-
   };
 }

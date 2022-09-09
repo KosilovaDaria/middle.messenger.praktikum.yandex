@@ -1,4 +1,4 @@
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 import * as style from './style.module.css';
 
 export default class Input extends Block {

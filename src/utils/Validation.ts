@@ -23,24 +23,26 @@ const hideMessage = (elem: HTMLFormElement) => {
 }
 const isValid = (inputName: string, inputValue: string) => {
   if (inputName == 'email') return regExpEmail.test(inputValue);
-  else if (inputName == 'login') return regExpLogin.test(inputValue);
-  else if (inputName == 'first_name') return regExpName.test(inputValue);
-  else if (inputName == 'second_name') return regExpName.test(inputValue);
-  else if (inputName == 'phone') return regExpPhone.test(inputValue);
-  else if (inputName == 'password') return regExpPassword.test(inputValue);
-  else if (inputName == 'passwordrpt') return regExpPassword.test(inputValue);
-  else return true;
+  if (inputName == 'login') return regExpLogin.test(inputValue);
+  if (inputName == 'first_name') return regExpName.test(inputValue);
+  if (inputName == 'second_name') return regExpName.test(inputValue);
+  if (inputName == 'phone') return regExpPhone.test(inputValue);
+  if (inputName == 'password') return regExpPassword.test(inputValue);
+  if (inputName == 'passwordrpt') return regExpPassword.test(inputValue);
+  return true;
 }
 
 const formValidation = (form: HTMLFormElement): FormData | string => {
   const formData: FormData = {};
   let error = false;
-  Array.from(form.elements).map((elem: any) => {
+  Array.from(form.elements).forEach((elem: any) => {
     if (elem.tagName === 'INPUT') {
       !isValid(elem.name, elem.value) ? (showMessage(elem), error = true) : formData[elem.name] = elem.value;
-    };
+    }
   })
   return error ? 'Не все поля формы заполнены корректно' : formData
 }
 
-export { isValid, showMessage, hideMessage, formValidation }
+export {
+  isValid, showMessage, hideMessage, formValidation,
+}

@@ -1,11 +1,13 @@
-import Form from "../../components/form/Form";
-import ProfileInput from "../../components/profileInput/ProfileInput";
-import Input from "../../components/input/Input";
-import Link from "../../components/link/Link";
-import Avatar from "../../components/avatar";
-import Button from "../../components/button/Button";
-import ProfileLayout from "../../layout/profile/profileLayout";
-import { isValid, showMessage, hideMessage, formValidation } from '../../utils/Validation';
+import Form from '../../components/form/Form';
+import ProfileInput from '../../components/profileInput/ProfileInput';
+import Input from '../../components/input/Input';
+import Link from '../../components/link/Link';
+import Avatar from '../../components/avatar/Avatar';
+import Button from '../../components/button/Button';
+import ProfileLayout from '../../layout/profile/profileLayout';
+import {
+  isValid, showMessage, hideMessage, formValidation,
+} from '../../utils/Validation';
 
 import * as styleForm from '../../components/form/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
@@ -25,16 +27,16 @@ const button = new Button({
 const avatar = new Avatar('div', {
   attr: {
     class: styleAvatar.avatar_profile,
-  }
+  },
 });
 
 const passForm = new Form('form', {
   attr: {
-    class: styleForm.profile_info
+    class: styleForm.profile_info,
   },
   inputOldPass: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block_extra
+      class: styleInputProfile.block_extra,
     },
     label: 'Старый пароль',
     input: new Input('input', {
@@ -43,68 +45,68 @@ const passForm = new Form('form', {
         name: 'password',
         class: styleInput.input_profile,
         type: 'password',
-      }
-    })
+      },
+    }),
   }),
   inputPass: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block_extra
+      class: styleInputProfile.block_extra,
     },
     label: 'Новый пароль',
     input: new Input('input', {
       events: {
-        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
         placeholder: '*******',
         name: 'password',
         class: styleInput.input_profile,
         type: 'password',
-      }
-    })
+      },
+    }),
   }),
   inputPassRpt: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block_extra
+      class: styleInputProfile.block_extra,
     },
     label: 'Повторите новый пароль',
     input: new Input('input', {
       events: {
-        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
         placeholder: '*******',
         name: 'passwordrpt',
         class: styleInput.input_profile,
         type: 'password',
-      }
-    })
+      },
+    }),
   }),
-  button: button,
+  button,
   events: {
-    submit: (e) => {
+    submit: (e: any) => {
       e.stopPropagation();
       e.preventDefault();
       console.log(formValidation(e.target))
-    }
-  }
+    },
+  },
 });
 
 const PassPage = new ProfileLayout('div', {
   attr: {
-    class: styleLayout.wrapper
+    class: styleLayout.wrapper,
   },
-  avatar: avatar,
+  avatar,
   form: passForm,
   link: new Link('a', {
     label: '<',
     attr: {
       href: '/chat',
-      class: styleButton.button_round
-    }
-  })
+      class: styleButton.button_round,
+    },
+  }),
 });
 
 export default PassPage;

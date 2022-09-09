@@ -1,11 +1,13 @@
-import Form from "../../components/form/Form";
-import ProfileInput from "../../components/profileInput/ProfileInput";
-import Input from "../../components/input/Input";
-import Link from "../../components/link/Link";
-import Button from "../../components/button/Button";
-import ProfileLayout from "../../layout/profile/profileLayout";
-import AvatarProfile from "../../components/avatarProfile/AvatarProfile";
-import { isValid, showMessage, hideMessage, formValidation } from '../../utils/Validation';
+import Form from '../../components/form/Form';
+import ProfileInput from '../../components/profileInput/ProfileInput';
+import Input from '../../components/input/Input';
+import Link from '../../components/link/Link';
+import Button from '../../components/button/Button';
+import ProfileLayout from '../../layout/profile/profileLayout';
+import AvatarProfile from '../../components/avatarProfile/AvatarProfile';
+import {
+  isValid, showMessage, hideMessage, formValidation,
+} from '../../utils/Validation';
 
 import * as styleForm from '../../components/form/style.module.css';
 import * as styleInput from '../../components/input/style.module.css';
@@ -23,83 +25,83 @@ const button = new Button({
 
 const settingsForm = new Form('form', {
   attr: {
-    class: styleForm.profile_info
+    class: styleForm.profile_info,
   },
   inputEmail: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Почта',
     input: new Input('input', {
       events: {
-        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
         placeholder: 'pochta@yandex.ru',
         name: 'email',
         class: styleInput.input_profile,
         type: 'email',
-      }
-    })
+      },
+    }),
   }),
   inputLogin: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Логин',
     input: new Input('input', {
       events: {
-        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
         placeholder: 'ivanivanov',
         name: 'login',
         class: styleInput.input_profile,
         type: 'text',
-      }
-    })
+      },
+    }),
   }),
   inputFirstName: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Имя',
     input: new Input('input', {
       events: {
-        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
         placeholder: 'Иван',
         name: 'first_name',
         class: styleInput.input_profile,
         type: 'text',
-      }
-    })
+      },
+    }),
   }),
   inputSecondName: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Фамилия',
     input: new Input('input', {
       events: {
-        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
         placeholder: 'Иванов',
         name: 'second_name',
         class: styleInput.input_profile,
         type: 'text',
-      }
-    })
+      },
+    }),
   }),
   inputDisplayName: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Имя в чате',
     input: new Input('input', {
@@ -108,40 +110,40 @@ const settingsForm = new Form('form', {
         name: 'displayname',
         class: styleInput.input_profile,
         type: 'text',
-      }
-    })
+      },
+    }),
   }),
   inputPhone: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Телефон',
     input: new Input('input', {
       events: {
-        focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-        blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+        focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
         placeholder: '+7 (909) 967 30 30',
         name: 'phone',
         class: styleInput.input_profile,
         type: 'phone',
-      }
-    })
+      },
+    }),
   }),
-  button: button,
+  button,
   events: {
-    submit: (e) => {
+    submit: (e: any) => {
       e.stopPropagation();
       e.preventDefault();
       console.log(formValidation(e.target))
-    }
-  }
+    },
+  },
 });
 
 const SettingsPage = new ProfileLayout('div', {
   attr: {
-    class: styleLayout.wrapper
+    class: styleLayout.wrapper,
   },
   avatar: new AvatarProfile({}),
   form: settingsForm,
@@ -149,9 +151,9 @@ const SettingsPage = new ProfileLayout('div', {
     label: '<',
     attr: {
       href: '/chat',
-      class: styleButton.button_round
-    }
-  })
+      class: styleButton.button_round,
+    },
+  }),
 });
 
 export default SettingsPage;

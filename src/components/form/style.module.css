@@ -1,20 +1,21 @@
-.input_group{
+.input_group {
   margin-bottom: 40px;
 }
+
 .valid_message {
   font-size: 10px;
   display: none;
   color: red;
 }
-.profile_info{
+
+.profile_info {
   width: 510px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;  
-}
-.display_name{
-font-size: 16px;
+  align-items: center;
 }
 
-
+.display_name {
+  font-size: 16px;
+}

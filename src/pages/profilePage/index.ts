@@ -1,9 +1,9 @@
-import ProfileLayout from "../../layout/profile/profileLayout";
-import Form from "../../components/form/Form";
-import ProfileInput from "../../components/profileInput/ProfileInput";
-import Input from "../../components/input/Input";
-import Link from "../../components/link/Link";
-import Avatar from "../../components/avatar";
+import ProfileLayout from '../../layout/profile/profileLayout';
+import Form from '../../components/form/Form';
+import ProfileInput from '../../components/profileInput/ProfileInput';
+import Input from '../../components/input/Input';
+import Link from '../../components/link/Link';
+import Avatar from '../../components/avatar/Avatar';
 
 import * as styleForm from '../../components/form/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
@@ -16,16 +16,16 @@ import * as styleLayout from '../../layout/profile/style.module.css';
 const avatar = new Avatar('div', {
   attr: {
     class: styleAvatar.avatar_profile,
-  }
+  },
 });
 const profileForm = new Form('form', {
   attr: {
-    class: styleForm.profile_info
+    class: styleForm.profile_info,
   },
-  
+
   inputEmail: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Почта',
     input: new Input('input', {
@@ -35,12 +35,12 @@ const profileForm = new Form('form', {
         name: 'email',
         class: styleInput.input_profile,
         type: 'email',
-      }
-    })
+      },
+    }),
   }),
   inputLogin: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Логин',
     input: new Input('input', {
@@ -50,12 +50,12 @@ const profileForm = new Form('form', {
         name: 'login',
         class: styleInput.input_profile,
         type: 'text',
-      }
-    })
+      },
+    }),
   }),
   inputFirstName: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Имя',
     input: new Input('input', {
@@ -65,12 +65,12 @@ const profileForm = new Form('form', {
         name: 'first_name',
         class: styleInput.input_profile,
         type: 'text',
-      }
-    })
+      },
+    }),
   }),
   inputSecondName: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Фамилия',
     input: new Input('input', {
@@ -80,12 +80,12 @@ const profileForm = new Form('form', {
         name: 'second_name',
         class: styleInput.input_profile,
         type: 'text',
-      }
-    })
+      },
+    }),
   }),
   inputDisplayName: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Имя в чате',
     input: new Input('input', {
@@ -95,12 +95,12 @@ const profileForm = new Form('form', {
         name: 'displayname',
         class: styleInput.input_profile,
         type: 'text',
-      }
-    })
+      },
+    }),
   }),
   inputPhone: new ProfileInput('div', {
     attr: {
-      class: styleInputProfile.block
+      class: styleInputProfile.block,
     },
     label: 'Телефон',
     input: new Input('input', {
@@ -110,45 +110,45 @@ const profileForm = new Form('form', {
         name: 'phone',
         class: styleInput.input_profile,
         type: 'phone',
-      }
-    })
+      },
+    }),
   }),
 });
 
 const ProfilePage = new ProfileLayout('div', {
   attr: {
-    class: styleLayout.wrapper
+    class: styleLayout.wrapper,
   },
   link: new Link('a', {
     label: '<',
-    attr:{
-      href:'/chat',
-      class: styleButton.button_round
-    }
+    attr: {
+      href: '/chat',
+      class: styleButton.button_round,
+    },
   }),
-  avatar: avatar,
+  avatar,
   displayname: 'Иван',
   form: profileForm,
   changeData: new Link('a', {
     label: 'Изменить данные',
     attr: {
       class: styleLink.link_controls,
-      href:'/settings'
-    }
+      href: '/settings',
+    },
   }),
   changePass: new Link('a', {
     label: 'Изменить пароль',
     attr: {
       class: styleLink.link_controls,
-      href:'/pass'
-    }
+      href: '/pass',
+    },
   }),
   quit: new Link('a', {
     label: 'Выйти',
     attr: {
       class: styleLink.link_controls,
-      href:'/login'
-    }
+      href: '/login',
+    },
   }),
 });
 

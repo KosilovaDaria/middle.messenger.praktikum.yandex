@@ -1,9 +1,11 @@
-import Form from "../../components/form/Form";
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
-import Link from "../../components/link/Link";
-import AuthLayout from "../../layout/auth/authLayout";
-import { isValid, showMessage, hideMessage, formValidation } from '../../utils/Validation';
+import Form from '../../components/form/Form';
+import Input from '../../components/input/Input';
+import Button from '../../components/button/Button';
+import Link from '../../components/link/Link';
+import AuthLayout from '../../layout/auth/authLayout';
+import {
+  isValid, showMessage, hideMessage, formValidation,
+} from '../../utils/Validation';
 
 import * as styleInput from '../../components/input/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
@@ -15,20 +17,20 @@ const button = new Button({
   attr: {
     class: styleButton.button,
     type: 'submit',
-  }
+  },
 });
 
 const link = new Link('a', {
   label: 'Войти',
   attr: {
     class: styleLink.link_block,
-    href: '/login'
-  }
+    href: '/login',
+  },
 });
 
 const form = new Form('form', {
   attr: {
-    class: styleLayout.form
+    class: styleLayout.form,
   },
   inputEmail: new Input('input', {
     attr: {
@@ -38,8 +40,8 @@ const form = new Form('form', {
       type: 'email',
     },
     events: {
-      focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-      blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputLogin: new Input('input', {
@@ -50,8 +52,8 @@ const form = new Form('form', {
       type: 'text',
     },
     events: {
-      focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-      blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputFirstName: new Input('input', {
@@ -62,8 +64,8 @@ const form = new Form('form', {
       type: 'text',
     },
     events: {
-      focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-      blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputSecondName: new Input('input', {
@@ -74,8 +76,8 @@ const form = new Form('form', {
       type: 'text',
     },
     events: {
-      focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-      blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputPhone: new Input('input', {
@@ -86,8 +88,8 @@ const form = new Form('form', {
       type: 'tel',
     },
     events: {
-      focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-      blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputPass: new Input('input', {
@@ -98,8 +100,8 @@ const form = new Form('form', {
       type: 'password',
     },
     events: {
-      focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-      blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputPassRpt: new Input('input', {
@@ -110,27 +112,27 @@ const form = new Form('form', {
       type: 'password',
     },
     events: {
-      focus: (e) => isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
-      blur: (e) => !isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target),
+      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
-  button: button,
+  button,
   events: {
-    submit: (e) => {
+    submit: (e: any) => {
       e.stopPropagation();
       e.preventDefault();
       console.log(formValidation(e.target))
-    }
-  }
+    },
+  },
 });
 
 const SignupPage = new AuthLayout('div', {
   attr: {
-    class: styleLayout.wrapper
+    class: styleLayout.wrapper,
   },
   title: 'Регистрация',
-  form: form,
-  link: link
+  form,
+  link,
 });
 
 export default SignupPage;

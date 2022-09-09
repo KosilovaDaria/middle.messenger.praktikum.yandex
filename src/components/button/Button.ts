@@ -1,14 +1,14 @@
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 import tpl from './tpl.hbs';
 
-// type ButtonProp = {
-//   label: string;
-//   attr: Record<string, any>,
-// }
+type ButtonProp = {
+  label: string;
+  attr: Record<string, any>,
+}
 
 export default class Button extends Block {
-  constructor(props ) {
-    super("button", props);
+  constructor(props:ButtonProp) {
+    super('button', props);
   }
   render() {
     return this.compile(tpl, this.props);
@@ -19,6 +19,3 @@ export default class Button extends Block {
     });
   }
 }
-
-
-

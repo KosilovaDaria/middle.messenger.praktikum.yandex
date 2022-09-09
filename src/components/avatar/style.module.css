@@ -1,19 +1,25 @@
-.avatar, .avatar_profile, .avatar_chat, .avatar_dialog {
+.avatar,
+.avatar_profile,
+.avatar_chat,
+.avatar_dialog {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #EFEFEF;
+  background: #efefef;
   margin-right: 10px;
 }
+
 .avatar_profile {
   width: 130px;
   height: 130px;
   margin: 0 auto;
 }
+
 .avatar_chat {
   width: 47px;
   height: 47px;
 }
+
 .avatar_dialog {
   width: 34px;
   height: 34px;
