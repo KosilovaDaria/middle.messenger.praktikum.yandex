@@ -7,7 +7,7 @@ import ChatPage from './pages/chatPage/index';
 import { ErrorPage, ServerErrorPage } from './pages/ErrorPage/index';
 import render from './utils/render';
 
-const routes = {
+const routes: Record<string, any> = {
   '/': LoginPage,
   '/login': LoginPage,
   '/signup': SignupPage,
