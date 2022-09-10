@@ -6,7 +6,6 @@ import AuthLayout from '../../layout/auth/authLayout';
 import {
   isValid, showMessage, hideMessage, formValidation,
 } from '../../utils/validation';
-
 import * as styleInput from '../../components/input/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
 import * as styleLink from '../../components/link/style.module.css';

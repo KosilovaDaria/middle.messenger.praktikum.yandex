@@ -8,7 +8,6 @@ import AvatarProfile from '../../components/avatarProfile/AvatarProfile';
 import {
   isValid, showMessage, hideMessage, formValidation,
 } from '../../utils/validation';
-
 import * as styleForm from '../../components/form/style.module.css';
 import * as styleInput from '../../components/input/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
@@ -147,7 +146,7 @@ const SettingsPage = new ProfileLayout('div', {
   },
   avatar: new AvatarProfile('div'),
   form: settingsForm,
-  link: new Link('a', {
+  link: new Link( {
     label: '<',
     attr: {
       href: '/chat',
