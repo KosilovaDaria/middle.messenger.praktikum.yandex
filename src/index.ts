@@ -25,5 +25,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (Object.keys(routes).find((el) => el === path)) {
     render('.app', routes[path]);
   } else {
-    render('.app', ErrorPage);  }
+    render('.app', ErrorPage);
+  }
 })

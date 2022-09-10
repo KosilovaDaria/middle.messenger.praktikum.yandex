@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import tpl from './tpl.hbs';
 import * as styles from './style.module.css';
-import attachBtn from '../../assets/img//attachBtn.png';
+import attachBtn from '../../assets/img/attachBtn.png';
 
 export default class ChatDialog extends Block {
   render() {
