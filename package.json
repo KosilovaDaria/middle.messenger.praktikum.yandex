@@ -7,9 +7,10 @@
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "start": "node ./server.js",
-    "eslint": "npx eslint . --ext .js,.ts ", 
+    "eslint": "npx eslint . --ext .js,.ts ",
     "eslint fix": "npx eslint --fix --fix-type suggestion --fix-type problem,layout .",
     "stylelint": "npx stylelint '**/*.css' ",
+    "check": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,21 +31,23 @@
   },
   "homepage": "https://github.com/KosilovaDaria/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "@parcel/transformer-typescript-tsc": "2.7.0",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
-    "express": "^4.18.1",
-    "parcel": "^2.6.2",
+    "express-history-api-fallback": "2.2.1",
+    "parcel": "2.7.0",
     "parcel-transformer-hbs": "^1.0.4",
     "stylelint": "^14.11.0",
     "stylelint-config-standard": "^28.0.0",
-    "typescript": "^4.8.2"
+    "typescript": "4.8.3"
   },
   "dependencies": {
     "@parcel/transformer-css": "^2.6.2",
     "autoprefixer": "^10.4.7",
+    "express": "4.18.1",
     "handlebars": "^4.7.7",
     "postcss-modules": "^4.3.1",
     "uuid": "^8.3.2"

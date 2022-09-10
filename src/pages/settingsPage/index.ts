@@ -147,7 +147,7 @@ const SettingsPage = new ProfileLayout('div', {
   },
   avatar: new AvatarProfile('div'),
   form: settingsForm,
-  link: new Link( {
+  link: new Link({
     label: '<',
     attr: {
       href: '/chat',

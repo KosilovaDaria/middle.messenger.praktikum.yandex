@@ -77,7 +77,7 @@ export default class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  componentDidUpdate(oldProps: any, newProps: any) {
+  componentDidUpdate(_oldProps: any, _newProps: any) {
     return true;
   }
 

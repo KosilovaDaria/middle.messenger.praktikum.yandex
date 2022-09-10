@@ -3,7 +3,6 @@ const regExpEmail = /^[-_.\w]+@([\w-]+\.)+[\w-]+$/;
 const regExpPhone = /^([+]?[0-9\s-\(\)]{10,15})*$/;
 const regExpName = /^[A-яА-ЯёЁa-zA-Z0-]+$/i;
 const regExpPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s{8,40}).*$/;
-const regExpMessage = /^\s*$/;
 
 type FormData = {
   [key: string]: string;
@@ -11,15 +10,11 @@ type FormData = {
 
 const showMessage = (elem: HTMLFormElement) => {
   const validMessage: HTMLElement | null = document.querySelector(`p[data-name = ${elem.name}]`);
-  const input: HTMLElement | null = document.querySelector(`input[name = ${elem.name}]`);
   validMessage!.style.display = 'block';
-  // input!.style.borderBottom = '1px solid red';
 }
 const hideMessage = (elem: HTMLFormElement) => {
   const validMessage: HTMLElement | null = document.querySelector(`p[data-name = ${elem.name}]`);
-  const input: HTMLElement | null = document.querySelector(`input[name = ${elem.name}]`);
   validMessage!.style.display = 'none';
-  // input!.style.borderBottom = '1px solid #3369F3'
 }
 const isValid = (inputName: string, inputValue: string) => {
   if (inputName == 'email') return regExpEmail.test(inputValue);

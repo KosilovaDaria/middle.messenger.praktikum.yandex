@@ -12,7 +12,7 @@ export default class Form extends Block {
   }
 
   addEvents() {
-    this._element!.querySelectorAll('form').forEach(form => {
+    this._element!.querySelectorAll('form').forEach((form: any) => {
       form.addEventListener('submit', this.props.events.submit);
     });
   }
