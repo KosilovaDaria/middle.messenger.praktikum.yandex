@@ -8,12 +8,17 @@ export default class Block {
     FLOW_RENDER: 'flow:render',
     FLOW_CDU: 'flow:component-did-update',
   };
+
   protected _element: HTMLElement | null = null;
-  // private _element: HTMLElement;
+
   private _meta: { tagName: string, props: any };
+
   protected props: any;
+
   _id: string | null = null;
+
   eventBus: () => EventBus;
+
   children: Record<string, Block>;
 
   constructor(tagName = 'div', propsAndChildren: any = {}) {
@@ -21,7 +26,6 @@ export default class Block {
     this.children = children;
 
     const eventBus = new EventBus();
-    // console.log(eventBus)
 
     this._meta = {
       tagName,
@@ -38,35 +42,30 @@ export default class Block {
   }
 
   _registerEvents(eventBus: EventBus) {
-    // console.log('_registerEvents')
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
+
   _createResources() {
     // console.log('_createResources')
     const { tagName } = this._meta;
     this._element = this._createDocumentElement(tagName);
-    // console.log(this._element)
   }
 
   protected init() {
-    // console.log('init')
     this._createResources();
-
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    // this._componentDidMount();
   }
 
   _componentDidMount() {
-    // console.log('_componentDidMount')
     this.componentDidMount();
   }
+
   componentDidMount() { }
 
   dispatchComponentDidMount() {
-    // console.log('dispatchComponentDidMount')
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
@@ -75,7 +74,6 @@ export default class Block {
     if (!response) {
       return
     }
-    // this._render();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
@@ -86,7 +84,7 @@ export default class Block {
   compile(template: Function, props: any) {
     const propsAndStubs = { ...props };
 
-    Object.entries(this.children).forEach(([key, child]) => {
+    Object.entries(this.children).forEach(([key, child]: [any, any]) => {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`
     });
 
@@ -104,7 +102,7 @@ export default class Block {
 
   addAttribute() {
     const { attr = {} } = this.props;
-    Object.entries(attr as Record<string, string>).forEach(([key, value]) => {
+    Object.entries(attr as Record<string, string>).forEach(([key, value]: [any, any]) => {
       this._element?.setAttribute(key, value);
     });
   }
@@ -113,7 +111,7 @@ export default class Block {
     const children: Record<string, Block> = {};
     const props: Record<string, any> = {};
 
-    Object.entries(propsAndChildren).forEach(([key, value]) => {
+    Object.entries(propsAndChildren).forEach(([key, value]: [any, any]) => {
       if (value instanceof Block) {
         children[key] = value;
       } else {
@@ -123,6 +121,7 @@ export default class Block {
 
     return { children, props }
   }
+
   _makePropsProxy(props: any) {
     const self = this;
 
@@ -132,14 +131,9 @@ export default class Block {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target: any, prop, val) {
-        // if (prop.startsWith('_')) {
-        //   throw new Error("Нет прав");
-        // } else {
-        // const oldTarget = { ...target }
         target[prop] = val;
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
         return true;
-        // }
       },
       deleteProperty() {
         throw new Error('Отказано в доступе');
@@ -185,6 +179,7 @@ export default class Block {
       this._element!.addEventListener(eventName, events[eventName]);
     });
   }
+
   _removeEvents(): void {
     const { events = {} } = this.props;
 

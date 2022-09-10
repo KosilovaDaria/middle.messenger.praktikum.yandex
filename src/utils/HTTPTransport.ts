@@ -1,4 +1,4 @@
-enum METHOD {
+const enum METHOD {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -28,8 +28,11 @@ function queryStringify(data: Record<string, string | number>) {
 
 export default class HTTPTransport {
   get = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.GET }, options.timeout);
+
   post = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.POST }, options.timeout);
+
   put = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.PUT }, options.timeout);
+
   delete = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.DELETE }, options.timeout);
 
   request = (url: string, options: Options, timeout: number = 5000): Promise<XMLHttpRequest> => {

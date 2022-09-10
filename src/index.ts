@@ -1,4 +1,4 @@
-import LoginPage from './pages/loginPage/index';
+import LoginPage from './pages/loginPage/index'
 import SignupPage from './pages/signupPage/index';
 import ProfilePage from './pages/profilePage/index';
 import SettingsPage from './pages/settingsPage/index';
@@ -6,8 +6,9 @@ import PassPage from './pages/passPage/index';
 import ChatPage from './pages/chatPage/index';
 import { ErrorPage, ServerErrorPage } from './pages/ErrorPage/index';
 import render from './utils/render';
+import Block from './utils/Block';
 
-const routes: Record<string, any> = {
+const routes:Record<string, Block> = {
   '/': LoginPage,
   '/login': LoginPage,
   '/signup': SignupPage,

@@ -9,7 +9,7 @@ export const ErrorPage = new ErrorLayout('div', {
   },
   errorCode: '404',
   errorMessege: 'Не туда попали',
-  link: new Link('a', {
+  link: new Link({
     attr: {
       class: styleLink.link_block,
       href: '/chat',
@@ -24,11 +24,11 @@ export const ServerErrorPage = new ErrorLayout('div', {
   },
   errorCode: '500',
   errorMessege: 'Мы уже фиксим',
-  link: new Link('a', {
+  link: new Link({
+    label: 'Назад к чатам',
     attr: {
       class: styleLink.link_block,
       href: '/chat',
     },
-    label: 'Назад к чатам',
   }),
 });

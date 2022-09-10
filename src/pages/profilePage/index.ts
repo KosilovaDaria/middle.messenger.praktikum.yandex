@@ -119,7 +119,7 @@ const ProfilePage = new ProfileLayout('div', {
   attr: {
     class: styleLayout.wrapper,
   },
-  link: new Link('a', {
+  link: new Link({
     label: '<',
     attr: {
       href: '/chat',
@@ -129,21 +129,21 @@ const ProfilePage = new ProfileLayout('div', {
   avatar,
   displayname: 'Иван',
   form: profileForm,
-  changeData: new Link('a', {
+  changeData: new Link({
     label: 'Изменить данные',
     attr: {
       class: styleLink.link_controls,
       href: '/settings',
     },
   }),
-  changePass: new Link('a', {
+  changePass: new Link({
     label: 'Изменить пароль',
     attr: {
       class: styleLink.link_controls,
       href: '/pass',
     },
   }),
-  quit: new Link('a', {
+  quit: new Link({
     label: 'Выйти',
     attr: {
       class: styleLink.link_controls,

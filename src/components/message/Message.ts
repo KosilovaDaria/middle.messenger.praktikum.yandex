@@ -4,6 +4,9 @@ import * as styles from './style.module.css';
 
 export default class Message extends Block {
   render() {
-    return this.compile(tpl, { ...this.props, timeClass: styles.time });
+    return this.compile(tpl, {
+      ...this.props,
+      timeClass: styles.time,
+    });
   }
 }

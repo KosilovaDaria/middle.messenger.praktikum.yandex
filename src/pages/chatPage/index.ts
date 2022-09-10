@@ -5,6 +5,7 @@ import Message from '../../components/message/Message';
 import Avatar from '../../components/avatar/Avatar';
 import Link from '../../components/link/Link';
 import Button from '../../components/button/Button';
+import Input from '../../components/input/Input';
 
 import * as styleLayout from '../../layout/chat/style.module.css';
 import * as styleList from '../../components/chatList/style.module.css';
@@ -12,8 +13,7 @@ import * as styleAvatar from '../../components/avatar/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
 import * as styleMessage from '../../components/message/style.module.css';
 
-import img from '../../../dist/img/msg_rd.png';
-import Input from '../../components/input/Input';
+import img from '../../assets/img/msg_rd.png';
 
 const list = new ChatList('li', {
   attr: {
@@ -25,7 +25,7 @@ const list = new ChatList('li', {
     },
   }),
   from: 'Вадим',
-  lastMessege: 'И Human Interface Guidelines и Material Design рекомендуют...',
+  lastMessege: 'И Human Interface Guidelines и Material Design рекомендуют использовать средствами CSS ',
   date: 'Пт',
 });
 
@@ -79,7 +79,7 @@ const ChatPage = new ChatLayout('div', {
   attr: {
     class: styleLayout.wrapper,
   },
-  link: new Link('a', {
+  link: new Link({
     label: 'Профиль >',
     attr: {
       href: '/profile',

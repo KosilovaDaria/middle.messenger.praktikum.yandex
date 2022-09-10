@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "start": "node ./dist/server.js",
+    "start": "node ./server.js",
+    "eslint": "npx eslint . --ext .js,.ts ", 
+    "eslint fix": "npx eslint --fix --fix-type suggestion --fix-type problem,layout .",
+    "stylelint": "npx stylelint '**/*.css' ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,8 +36,6 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "express": "^4.18.1",
-    "i": "^0.3.7",
-    "npm": "^8.19.1",
     "parcel": "^2.6.2",
     "parcel-transformer-hbs": "^1.0.4",
     "stylelint": "^14.11.0",

@@ -12,6 +12,6 @@
     "sourceMap": true,
     "noPropertyAccessFromIndexSignature": true,
     "noUnusedParameters": true,
-
+    "noUnusedLocals": true
   }
 }

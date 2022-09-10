@@ -4,6 +4,9 @@ import * as styles from './style.module.css';
 
 export default class ProfileInput extends Block {
   render() {
-    return this.compile(tpl, { ...this.props, blockClass: styles.block });
+    return this.compile(tpl, {
+      ...this.props,
+      blockClass: styles.block,
+    });
   }
 }
