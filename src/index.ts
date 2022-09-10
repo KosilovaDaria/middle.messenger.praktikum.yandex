@@ -1,4 +1,4 @@
-import LoginPage from './pages/loginPage/index'
+import LoginPage from './pages/loginPage/index';
 import SignupPage from './pages/signUpPage/index';
 import ProfilePage from './pages/profilePage/index';
 import SettingsPage from './pages/settingsPage/index';
@@ -25,7 +25,5 @@ window.addEventListener('DOMContentLoaded', () => {
   if (Object.keys(routes).find((el) => el === path)) {
     render('.app', routes[path]);
   } else {
-    render('.app', ErrorPage);
-    console.log('No page')
-  }
+    render('.app', ErrorPage);  }
 })

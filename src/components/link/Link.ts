@@ -15,7 +15,7 @@ export default class Link extends Block {
   }
 
   addEvents() {
-    this._element!.querySelectorAll('a').forEach(a => {
+    this._element!.querySelectorAll('a').forEach((a: any) => {
       a.addEventListener('click', this.props.events.click);
     });
   }

@@ -16,7 +16,7 @@ export default class Button extends Block {
   }
 
   addEvents() {
-    this._element!.querySelectorAll('button').forEach(btn => {
+    this._element!.querySelectorAll('button').forEach((btn: any) => {
       btn.addEventListener('click', this.props.events.click);
     });
   }

@@ -1,5 +1,1 @@
-declare namespace Express {
-  export interface Request {
-     tenant?: string
-  }
-}
+declare module 'uuid'
