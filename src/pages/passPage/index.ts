@@ -7,7 +7,8 @@ import Button from '../../components/button/Button';
 import ProfileLayout from '../../layout/profile/profileLayout';
 import {
   isValid, showMessage, hideMessage, formValidation,
-} from '../../utils/validation';
+} from '../../utils/validator';
+
 import * as styleForm from '../../components/form/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
 import * as styleInput from '../../components/input/style.module.css';
