@@ -7,7 +7,7 @@ import Button from '../../components/button/Button';
 import ProfileLayout from '../../layout/profile/profileLayout';
 import {
   isValid, showMessage, hideMessage, formValidation,
-} from '../../utils/Validation';
+} from '../../utils/validation';
 
 import * as styleForm from '../../components/form/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
@@ -100,7 +100,7 @@ const PassPage = new ProfileLayout('div', {
   },
   avatar,
   form: passForm,
-  link: new Link('a', {
+  link: new Link({
     label: '<',
     attr: {
       href: '/chat',

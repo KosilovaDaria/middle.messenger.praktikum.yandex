@@ -7,7 +7,7 @@ import ProfileLayout from '../../layout/profile/profileLayout';
 import AvatarProfile from '../../components/avatarProfile/AvatarProfile';
 import {
   isValid, showMessage, hideMessage, formValidation,
-} from '../../utils/Validation';
+} from '../../utils/validation';
 
 import * as styleForm from '../../components/form/style.module.css';
 import * as styleInput from '../../components/input/style.module.css';
@@ -145,7 +145,7 @@ const SettingsPage = new ProfileLayout('div', {
   attr: {
     class: styleLayout.wrapper,
   },
-  avatar: new AvatarProfile({}),
+  avatar: new AvatarProfile('div'),
   form: settingsForm,
   link: new Link('a', {
     label: '<',

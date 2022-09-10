@@ -5,7 +5,7 @@ import Link from '../../components/link/Link';
 import AuthLayout from '../../layout/auth/authLayout';
 import {
   isValid, showMessage, hideMessage, formValidation,
-} from '../../utils/Validation';
+} from '../../utils/validation';
 
 import * as styleInput from '../../components/input/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
@@ -20,7 +20,7 @@ const button = new Button({
   },
 })
 
-const link = new Link('a', {
+const link = new Link({
   label: 'Нет аккаунта?',
   attr: {
     class: styleLink.link_block,
@@ -60,7 +60,6 @@ const form = new Form('form', {
   button,
   events: {
     submit: (e: any) => {
-      e.stopPropagation();
       e.preventDefault();
       console.log(formValidation(e.target))
     },
