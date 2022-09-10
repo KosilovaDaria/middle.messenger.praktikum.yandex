@@ -1,5 +1,5 @@
 import LoginPage from './pages/loginPage/index'
-import SignupPage from './pages/signupPage/index';
+import SignupPage from './pages/signUpPage/index';
 import ProfilePage from './pages/profilePage/index';
 import SettingsPage from './pages/settingsPage/index';
 import PassPage from './pages/passPage/index';
