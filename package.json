@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "start": "node ./server.js",
+    "start": "npm run build && node ./server.js",
     "eslint": "npx eslint . --ext .js,.ts ",
     "eslint fix": "npx eslint --fix --fix-type suggestion --fix-type problem,layout .",
     "stylelint": "npx stylelint '**/*.css' ",
