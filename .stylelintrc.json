@@ -8,5 +8,5 @@
   "ignoreFiles": [
     "dist/*"
   ],
-  "ignoreValues": ["box", "box-orient", "line-clamp"]
+  "ignoreValues": ["display: -webkit-box", "box-orient", "line-clamp"]
 } 
