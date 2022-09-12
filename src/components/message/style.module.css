@@ -1,0 +1,33 @@
+.messege_wrap {
+  width: 100%;
+}
+
+.messege,
+.messege_from,
+.messege_to {
+  max-width: 400px;
+  min-width: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.messege_from {
+  border-radius: 10px;
+  background: #f8f8f8;
+  align-self: flex-start;
+}
+
+.messege_to {
+  border-radius: 10px 10px 0;
+  background: #e4edfd;
+  align-self: flex-end;
+}
+
+.time {
+  font-size: 10px;
+  text-align: right;
+  color: #999;
+  margin-left: 10px;
+}

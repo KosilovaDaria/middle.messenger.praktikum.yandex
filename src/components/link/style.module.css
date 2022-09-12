@@ -1,17 +1,16 @@
 .link_block {
   padding: 10px 0;
+  color: #3369f3;
 }
-.link_block > a {
-  text-decoration: none;
-  display: block;
-  font-size: 12px;
-}
-.link_controls{
+
+.link_controls {
   width: 100%;
-  color: #3369F3;
-  border-bottom: 1px solid #EAEAEA;
+  color: #3369f3;
+  border-bottom: 1px solid #eaeaea;
+  padding: 10px 0;
 }
-.link_controls:nth-child(3n){
+
+.link_controls:nth-child(3n) {
   color: red;
   border-bottom: none;
 }

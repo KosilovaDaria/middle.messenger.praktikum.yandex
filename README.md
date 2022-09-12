@@ -14,14 +14,9 @@ Express: npm run start
 
 Netlify: https://voluble-crepe-6a0f21.netlify.app
 
-Все страницы сврерстаны без функционала.
+Использован компонентный подход, базовый класс Block.
 
 Простой роутинг при использовании express (перемещение между страницами по кнопкам и ссылкам)
 
-На netlify перемещение между страницами мануально, ех:
+Переход на страницу чата(профиля) мануально - использовать путь /chat(/profile)
 
-https://voluble-crepe-6a0f21.netlify.app/signup
-
-https://voluble-crepe-6a0f21.netlify.app/chat
-
-https://voluble-crepe-6a0f21.netlify.app/profile

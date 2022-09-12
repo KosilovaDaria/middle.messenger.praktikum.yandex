@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "extends": ["airbnb-base", "airbnb-typescript/base"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "comma-dangle":"off",
+    "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/semi": "off",
+    "no-underscore-dangle":"off",
+    "no-console": "off",
+    "arrow-parens":"off",
+    "max-len": [2, 400],
+    "@typescript-eslint/no-unused-vars": "off",
+    "eqeqeq": "off",
+    "no-param-reassign": 0,
+    "class-methods-use-this": "off",
+    "no-useless-escape": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
+    "func-names": "off"
+    }
+}
