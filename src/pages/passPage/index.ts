@@ -8,6 +8,7 @@ import ProfileLayout from '../../layout/profile/profileLayout';
 import {
   isValid, showMessage, hideMessage, formValidation,
 } from '../../utils/validator';
+import Router from '../../utils/Router';
 
 import * as styleForm from '../../components/form/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
@@ -15,6 +16,8 @@ import * as styleInput from '../../components/input/style.module.css';
 import * as styleAvatar from '../../components/avatar/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
 import * as styleLayout from '../../layout/profile/style.module.css';
+
+const router = new Router('.app');
 
 const button = new Button({
   label: 'Сохранить',
@@ -89,7 +92,8 @@ const passForm = new Form('form', {
     submit: (e: any) => {
       e.stopPropagation();
       e.preventDefault();
-      console.log(formValidation(e.target))
+      console.log(formValidation(e.target));
+      router.go('/profile')
     },
   },
 });
@@ -103,8 +107,11 @@ const PassPage = new ProfileLayout('div', {
   link: new Link({
     label: '<',
     attr: {
-      href: '/chat',
+      // href: '/chat',
       class: styleButton.button_round,
+    },
+    events: {
+      click: () => router.back(),
     },
   }),
 });

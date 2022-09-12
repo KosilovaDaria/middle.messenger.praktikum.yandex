@@ -195,6 +195,7 @@ export default class Block {
   }
 
   show() {
+    console.log(this.getContent())
     this.getContent()!.style.display = 'block';
   }
 

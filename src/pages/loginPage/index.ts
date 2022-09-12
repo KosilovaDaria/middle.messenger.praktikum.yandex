@@ -6,11 +6,14 @@ import AuthLayout from '../../layout/auth/authLayout';
 import {
   isValid, showMessage, hideMessage, formValidation,
 } from '../../utils/validator';
+import Router from '../../utils/Router';
 
 import * as styleInput from '../../components/input/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
 import * as styleLink from '../../components/link/style.module.css';
 import * as styleLayout from '../../layout/auth/style.module.css';
+
+const router = new Router('.app');
 
 const button = new Button({
   label: 'Авторизоваться',
@@ -24,7 +27,10 @@ const link = new Link({
   label: 'Нет аккаунта?',
   attr: {
     class: styleLink.link_block,
-    href: '/signup',
+    // href: '/sign-up',
+  },
+  events: {
+    click: () => router.go('/sign-up'),
   },
 });
 
@@ -62,6 +68,7 @@ const form = new Form('form', {
     submit: (e: any) => {
       e.preventDefault();
       console.log(formValidation(e.target))
+      router.go('/messenger')
     },
   },
 });

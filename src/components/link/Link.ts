@@ -4,6 +4,9 @@ import tpl from './tpl.hbs';
 type LinkProps = {
   label: string,
   attr: Record<string, any>
+  events: {
+    click: (e: Event) => void;
+  }
 }
 
 export default class Link extends Block {

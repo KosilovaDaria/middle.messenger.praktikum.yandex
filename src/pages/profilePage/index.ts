@@ -4,6 +4,7 @@ import ProfileInput from '../../components/profileInput/ProfileInput';
 import Input from '../../components/input/Input';
 import Link from '../../components/link/Link';
 import Avatar from '../../components/avatar/Avatar';
+import Router from '../../utils/Router';
 
 import * as styleForm from '../../components/form/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
@@ -12,6 +13,8 @@ import * as styleLink from '../../components/link/style.module.css';
 import * as styleAvatar from '../../components/avatar/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
 import * as styleLayout from '../../layout/profile/style.module.css';
+
+const router = new Router('.app');
 
 const avatar = new Avatar('div', {
   attr: {
@@ -122,8 +125,11 @@ const ProfilePage = new ProfileLayout('div', {
   link: new Link({
     label: '<',
     attr: {
-      href: '/chat',
+      // href: '/chat',
       class: styleButton.button_round,
+    },
+    events: {
+      click: () => router.back(),
     },
   }),
   avatar,
@@ -133,21 +139,30 @@ const ProfilePage = new ProfileLayout('div', {
     label: 'Изменить данные',
     attr: {
       class: styleLink.link_controls,
-      href: '/settings',
+      // href: '/settings',
+    },
+    events: {
+      click: () => router.go('/settings'),
     },
   }),
   changePass: new Link({
     label: 'Изменить пароль',
     attr: {
       class: styleLink.link_controls,
-      href: '/pass',
+      // href: '/pass',
+    },
+    events: {
+      click: () => router.go('/pass'),
     },
   }),
   quit: new Link({
     label: 'Выйти',
     attr: {
       class: styleLink.link_controls,
-      href: '/login',
+      // href: '/login',
+    },
+    events: {
+      click: () => router.go('/'),
     },
   }),
 });
