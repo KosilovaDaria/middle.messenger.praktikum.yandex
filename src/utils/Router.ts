@@ -20,21 +20,21 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: any) {
+  public use(pathname: string, block: any) {
   // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;
   }
 
-  start() {
+  public start() {
     window.onpopstate = (event: any) => {
       this._onRoute(event?.currentTarget?.location.pathname);
     };
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname: string) {
+  private _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
     if (!route) {
       return;

@@ -19,7 +19,7 @@ type FormProps = {
   inputPassRpt?: Input | ProfileInput,
   button?: Button,
   events?: {
-    submit: () => void;
+    submit: (e?: any) => void;
   }
 }
 export default class Form extends Block<FormProps> {

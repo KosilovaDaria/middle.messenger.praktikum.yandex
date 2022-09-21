@@ -7,6 +7,8 @@ import {
   isValid, showMessage, hideMessage, formValidation,
 } from '../../utils/validator';
 import Router from '../../utils/Router';
+import AuthController from '../../controllers/AuthController';
+import { SignupData } from '../../api/AuthApi';
 
 const router = new Router('.app');
 
@@ -23,13 +25,14 @@ const link = new Link({
 });
 
 const form = new Form({
+  name: 'formSignin',
   inputEmail: new Input({
     placeholder: 'Почта',
     name: 'email',
     type: 'email',
     events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputLogin: new Input({
@@ -38,8 +41,8 @@ const form = new Form({
     name: 'logput',
     type: 'text',
     events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      focus: (e) => (isValid(e.target.name, e.target?.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputFirstName: new Input({
@@ -48,8 +51,8 @@ const form = new Form({
     name: 'first_naput',
     type: 'text',
     events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputSecondName: new Input({
@@ -58,8 +61,8 @@ const form = new Form({
     name: 'second_naput',
     type: 'text',
     events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputPhone: new Input({
@@ -68,8 +71,8 @@ const form = new Form({
     name: 'phnput',
     type: 'tel',
     events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputPass: new Input({
@@ -78,8 +81,8 @@ const form = new Form({
     name: 'password',
     type: 'password',
     events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputPassRpt: new Input({
@@ -88,16 +91,19 @@ const form = new Form({
     name: 'passwordrpt',
     type: 'password',
     events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   button,
   events: {
-    submit: (e: any) => {
+    submit: (e) => {
       e.preventDefault();
-      console.log(formValidation(e.target))
-      router.go('/')
+      // console.log(formValidation(e.target))
+      const data = formValidation(e.target) as SignupData
+      console.log(data)
+      AuthController.signup(data)
+      // router.go('/')
     },
   },
 });

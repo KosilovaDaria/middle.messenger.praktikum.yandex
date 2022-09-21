@@ -8,8 +8,8 @@ type InputProps = {
   placeholder: string;
   attr?: Record<string, string>
   events?: {
-    focus: () => void;
-    blur: () => void;
+    focus: (e?: any) => void;
+    blur: (e?: any) => void;
   };
 }
 

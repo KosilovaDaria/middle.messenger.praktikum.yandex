@@ -55,7 +55,7 @@ export default class Route {
     if (!this._block) {
       this._block = this._blockClass;
       // this._block = new this._blockClass();   // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
-      render(this._props.rootQuery, this._block);
+      render(this._props.rootQuery, this._block!);
       return;
     }
 

@@ -7,6 +7,8 @@ import {
   isValid, showMessage, hideMessage, formValidation,
 } from '../../utils/validator';
 import Router from '../../utils/Router';
+import { SigninData } from '../../api/AuthApi';
+import AuthController from '../../controllers/AuthController';
 
 const router = new Router('.app');
 
@@ -29,8 +31,8 @@ const form = new Form({
     name: 'login',
     type: 'text',
     events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   inputPass: new Input({
@@ -38,16 +40,18 @@ const form = new Form({
     name: 'password',
     type: 'password',
     events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+      blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
   button,
   events: {
-    submit: (e: any) => {
+    submit: (e) => {
       e.preventDefault();
-      console.log(formValidation(e.target))
-      router.go('/messenger')
+      const data = formValidation(e.target) as SigninData
+      console.log(data)
+      AuthController.signin(data)
+      // router.go('/messenger')
     },
   },
 });
