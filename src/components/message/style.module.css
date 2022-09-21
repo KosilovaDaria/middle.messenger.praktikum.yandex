@@ -2,9 +2,9 @@
   width: 100%;
 }
 
-.messege,
-.messege_from,
-.messege_to {
+.message,
+.message_from,
+.message_to {
   max-width: 400px;
   min-width: 10px;
   border-radius: 10px;
@@ -13,13 +13,13 @@
   align-items: flex-end;
 }
 
-.messege_from {
+.message_from {
   border-radius: 10px;
   background: #f8f8f8;
   align-self: flex-start;
 }
 
-.messege_to {
+.message_to {
   border-radius: 10px 10px 0;
   background: #e4edfd;
   align-self: flex-end;
@@ -30,4 +30,8 @@
   text-align: right;
   color: #999;
   margin-left: 10px;
+}
+
+.hidden {
+  display:none
 }

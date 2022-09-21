@@ -1,10 +1,12 @@
-<div class="{{listBlockClass}}">
-  <div class="{{linkClass}}">
-    {{{link}}}
+<div class="{{styles.wrapper}}">
+  <div class="{{styles.list_block}}">
+    <div class="{{styles.link}}">
+      {{{link}}}
+    </div>
+    <input class="{{styles.search_input}}" placeholder="Поиск">
+    <ul class="{{styles.chat_list}}">
+      {{{chatList}}}
+    </ul>
   </div>
-  <input class="{{inputClass}}" placeholder="Поиск">
-  <ul class="{{listClass}}">
-    {{{chatList}}}
-  </ul>
+  {{{chatDialog}}}
 </div>
-{{{chatDialog}}}

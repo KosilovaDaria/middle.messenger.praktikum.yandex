@@ -17,7 +17,7 @@
   margin: 20px 0;
 }
 
-.link > a {
+.link > span {
   display: block;
   text-align: right;
   color: #999;
@@ -35,15 +35,6 @@
 .chat_list {
   border-top: 1px solid #eaeaea;
   margin-top: 10px;
-}
-
-.dialog_block {
-  width: 100%;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .messege_input {

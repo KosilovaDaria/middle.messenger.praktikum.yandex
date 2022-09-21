@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "ES2017",
-    "lib": ["es2017", "DOM"],
+    "lib": ["es2017", "DOM", "DOM.Iterable", "dom.iterable"],
     "declaration": false,
     "module": "ES6",
     "moduleResolution": "node",

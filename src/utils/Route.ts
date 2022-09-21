@@ -4,6 +4,19 @@ import render from './render';
 function isEqual(lhs: any, rhs: any) {
   return lhs === rhs;
 }
+// function render(query: string, block: Block) {
+//   const root = document.querySelector(query);
+
+//   if (root === null) {
+//     throw new Error(`root not found by selector "${query}"`);
+//   }
+//   console.log(block)
+//   root.innerHTML = '';
+
+//   root.append(block.getContent()!);
+
+//   return root;
+// }
 
 export default class Route {
   _pathname: string;

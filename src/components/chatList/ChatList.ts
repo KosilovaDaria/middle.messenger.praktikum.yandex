@@ -1,15 +1,19 @@
 import Block from '../../utils/Block';
 import tpl from './tpl.hbs';
 import * as styles from './style.module.css';
+import Avatar from '../avatar/Avatar';
 
-export default class ChatList extends Block {
+type ChatListProps = {
+  avatar: Avatar,
+  from: string,
+  lastMessage: string,
+  date: string
+}
+export default class ChatList extends Block<ChatListProps> {
+  constructor(props: ChatListProps) {
+    super({ ...props })
+  }
   render() {
-    return this.compile(tpl, {
-      ...this.props,
-      contentClass: styles.item_content,
-      nameClass: styles.user_name,
-      msgClass: styles.user_messege,
-      dateClass: styles.item_date,
-    });
+    return this.compile(tpl, { ...this.props, styles });
   }
 }

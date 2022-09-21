@@ -12,122 +12,104 @@ import * as styleInput from '../../components/input/style.module.css';
 import * as styleLink from '../../components/link/style.module.css';
 import * as styleAvatar from '../../components/avatar/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
-import * as styleLayout from '../../layout/profile/style.module.css';
 
 const router = new Router('.app');
 
-const avatar = new Avatar('div', {
+const avatar = new Avatar({
   attr: {
     class: styleAvatar.avatar_profile,
   },
 });
-const profileForm = new Form('form', {
+const profileForm = new Form({
+  name: 'formProfile',
   attr: {
     class: styleForm.profile_info,
   },
-
-  inputEmail: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputEmail: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Почта',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'pochta@yandex.ru',
+      name: 'email',
+      type: 'email',
       attr: {
-        disabled: 'disabled',
-        placeholder: 'pochta@yandex.ru',
-        name: 'email',
         class: styleInput.input_profile,
-        type: 'email',
+        disabled: 'disabled',
       },
     }),
   }),
-  inputLogin: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputLogin: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Логин',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'ivanivanov',
+      name: 'login',
+      type: 'text',
       attr: {
-        disabled: 'disabled',
-        placeholder: 'ivanivanov',
-        name: 'login',
         class: styleInput.input_profile,
-        type: 'text',
+        disabled: 'disabled',
       },
     }),
   }),
-  inputFirstName: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputFirstName: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Имя',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'Иван',
+      name: 'first_name',
+      type: 'text',
       attr: {
-        disabled: 'disabled',
-        placeholder: 'Иван',
-        name: 'first_name',
         class: styleInput.input_profile,
-        type: 'text',
+        disabled: 'disabled',
       },
     }),
   }),
-  inputSecondName: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputSecondName: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Фамилия',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'Иванов',
+      name: 'second_name',
+      type: 'text',
       attr: {
-        disabled: 'disabled',
-        placeholder: 'Иванов',
-        name: 'second_name',
         class: styleInput.input_profile,
-        type: 'text',
+        disabled: 'disabled',
       },
     }),
   }),
-  inputDisplayName: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputDisplayName: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Имя в чате',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'Иван',
+      name: 'displayname',
+      type: 'text',
       attr: {
-        disabled: 'disabled',
-        placeholder: 'Иван',
-        name: 'displayname',
         class: styleInput.input_profile,
-        type: 'text',
+        disabled: 'disabled',
       },
+
     }),
   }),
-  inputPhone: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputPhone: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Телефон',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: '+7 (909) 967 30 30',
+      name: 'phone',
+      type: 'phone',
       attr: {
-        disabled: 'disabled',
-        placeholder: '+7 (909) 967 30 30',
-        name: 'phone',
         class: styleInput.input_profile,
-        type: 'phone',
+        disabled: 'disabled',
       },
     }),
   }),
 });
 
-const ProfilePage = new ProfileLayout('div', {
-  attr: {
-    class: styleLayout.wrapper,
-  },
+const ProfilePage = new ProfileLayout({
   link: new Link({
     label: '<',
-    attr: {
-      // href: '/chat',
-      class: styleButton.button_round,
-    },
+    attr: { class: styleButton.button_round },
     events: {
       click: () => router.back(),
     },
@@ -137,30 +119,21 @@ const ProfilePage = new ProfileLayout('div', {
   form: profileForm,
   changeData: new Link({
     label: 'Изменить данные',
-    attr: {
-      class: styleLink.link_controls,
-      // href: '/settings',
-    },
+    attr: { class: styleLink.link_controls },
     events: {
       click: () => router.go('/settings'),
     },
   }),
   changePass: new Link({
     label: 'Изменить пароль',
-    attr: {
-      class: styleLink.link_controls,
-      // href: '/pass',
-    },
+    attr: { class: styleLink.link_controls },
     events: {
       click: () => router.go('/pass'),
     },
   }),
   quit: new Link({
     label: 'Выйти',
-    attr: {
-      class: styleLink.link_controls,
-      // href: '/login',
-    },
+    attr: { class: styleLink.link_controls },
     events: {
       click: () => router.go('/'),
     },

@@ -15,76 +15,61 @@ import * as styleInputProfile from '../../components/profileInput/style.module.c
 import * as styleInput from '../../components/input/style.module.css';
 import * as styleAvatar from '../../components/avatar/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
-import * as styleLayout from '../../layout/profile/style.module.css';
 
 const router = new Router('.app');
 
 const button = new Button({
   label: 'Сохранить',
-  attr: {
-    class: styleButton.button,
-    type: 'submit',
-  },
+  type: 'submit',
 });
 
-const avatar = new Avatar('div', {
+const avatar = new Avatar({
   attr: {
     class: styleAvatar.avatar_profile,
   },
 });
 
-const passForm = new Form('form', {
+const passForm = new Form({
+  name: 'formPass',
   attr: {
     class: styleForm.profile_info,
   },
-  inputOldPass: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block_extra,
-    },
+  inputOldPass: new ProfileInput({
+    attr: { class: styleInputProfile.block_extra },
     label: 'Старый пароль',
-    input: new Input('input', {
-      attr: {
-        placeholder: '*****',
-        name: 'password',
-        class: styleInput.input_profile,
-        type: 'password',
-      },
+    input: new Input({
+      placeholder: '*****',
+      name: 'password',
+      type: 'password',
+      attr: { class: styleInput.input_profile },
     }),
   }),
-  inputPass: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block_extra,
-    },
+  inputPass: new ProfileInput({
+    attr: { class: styleInputProfile.block_extra },
     label: 'Новый пароль',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: '*******',
+      name: 'password',
+      type: 'password',
       events: {
         focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
         blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
-      attr: {
-        placeholder: '*******',
-        name: 'password',
-        class: styleInput.input_profile,
-        type: 'password',
-      },
+      attr: { class: styleInput.input_profile },
     }),
   }),
-  inputPassRpt: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block_extra,
-    },
+  inputPassRpt: new ProfileInput({
+    attr: { class: styleInputProfile.block_extra },
     label: 'Повторите новый пароль',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: '*******',
+      name: 'passwordrpt',
+      type: 'password',
       events: {
         focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
         blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
-      attr: {
-        placeholder: '*******',
-        name: 'passwordrpt',
-        class: styleInput.input_profile,
-        type: 'password',
-      },
+      attr: { class: styleInput.input_profile },
     }),
   }),
   button,
@@ -98,22 +83,16 @@ const passForm = new Form('form', {
   },
 });
 
-const PassPage = new ProfileLayout('div', {
-  attr: {
-    class: styleLayout.wrapper,
-  },
-  avatar,
-  form: passForm,
+const PassPage = new ProfileLayout({
   link: new Link({
     label: '<',
-    attr: {
-      // href: '/chat',
-      class: styleButton.button_round,
-    },
+    attr: { class: styleButton.button_round },
     events: {
       click: () => router.back(),
     },
   }),
+  avatar,
+  form: passForm,
 });
 
 export default PassPage;

@@ -8,56 +8,35 @@ import {
 } from '../../utils/validator';
 import Router from '../../utils/Router';
 
-import * as styleInput from '../../components/input/style.module.css';
-import * as styleButton from '../../components/button/style.module.css';
-import * as styleLink from '../../components/link/style.module.css';
-import * as styleLayout from '../../layout/auth/style.module.css';
-
 const router = new Router('.app');
 
 const button = new Button({
   label: 'Авторизоваться',
-  attr: {
-    class: styleButton.button,
-    type: 'submit',
-  },
+  type: 'submit',
 })
 
 const link = new Link({
   label: 'Нет аккаунта?',
-  attr: {
-    class: styleLink.link_block,
-    // href: '/sign-up',
-  },
   events: {
     click: () => router.go('/sign-up'),
   },
 });
 
-const form = new Form('form', {
-  attr: {
-    class: styleLayout.form,
-    name: 'formLogin',
-  },
-  inputLogin: new Input('input', {
-    attr: {
-      placeholder: 'Логин',
-      name: 'login',
-      class: styleInput.input,
-      type: 'text',
-    },
+const form = new Form({
+  name: 'formLogin',
+  inputLogin: new Input({
+    placeholder: 'Логин',
+    name: 'login',
+    type: 'text',
     events: {
       focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
     },
   }),
-  inputPass: new Input('input', {
-    attr: {
-      placeholder: 'Пароль',
-      name: 'password',
-      class: styleInput.input,
-      type: 'password',
-    },
+  inputPass: new Input({
+    placeholder: 'Пароль',
+    name: 'password',
+    type: 'password',
     events: {
       focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
@@ -73,13 +52,26 @@ const form = new Form('form', {
   },
 });
 
-const LoginPage = new AuthLayout('div', {
-  attr: {
-    class: styleLayout.wrapper,
-  },
+const LoginPage = new AuthLayout({
   title: 'Вход',
   form,
   link,
 });
 
 export default LoginPage;
+
+
+// export default class LoginPage extends Block {
+//   constructor() {
+//     super({})
+//   }
+//   init() {
+//     this.children.button = new Button({
+//       label: 'Авторизоваться',
+//       type: 'submit',
+//     })
+//   }
+//   render() {
+//     return this.compile(tpl, {...this.props})
+//   }
+// }

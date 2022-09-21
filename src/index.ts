@@ -8,7 +8,8 @@ import { ErrorPage, ServerErrorPage } from './pages/ErrorPage/index';
 import render from './utils/render';
 import Block from './utils/Block';
 import Router from './utils/Router';
-import AuthLayout from './layout/auth/authLayout'
+import AuthLayout from './layout/auth/authLayout';
+import Button from './components/button/Button';
 
 // const routes:Record<string, Block> = {
 //   '/': LoginPage,
@@ -30,15 +31,16 @@ import AuthLayout from './layout/auth/authLayout'
 //     render('.app', ErrorPage);
 //   }
 // })
-// window.addEventListener('DOMContentLoaded', () => {
-const router = new Router('.app');
-router
-  .use('/', LoginPage)
-  .use('/sign-up', SignupPage)
-  .use('/profile', ProfilePage)
-  .use('/settings', SettingsPage)
-  .use('/pass', PassPage)
-  .use('/messenger', ChatPage)
-  .use('/*', ErrorPage)
-  .start();
-// })
+window.addEventListener('DOMContentLoaded', () => {
+  const router = new Router('.app');
+  router
+    .use('/', LoginPage)
+    .use('/sign-up', SignupPage)
+    .use('/profile', ProfilePage)
+    .use('/settings', SettingsPage)
+    .use('/pass', PassPage)
+    .use('/messenger', ChatPage)
+    .use('/404', ErrorPage)
+    .use('/500', ServerErrorPage)
+    .start();
+})

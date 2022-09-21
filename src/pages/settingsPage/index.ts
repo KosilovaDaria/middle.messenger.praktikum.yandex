@@ -14,124 +14,107 @@ import * as styleForm from '../../components/form/style.module.css';
 import * as styleInput from '../../components/input/style.module.css';
 import * as styleInputProfile from '../../components/profileInput/style.module.css';
 import * as styleButton from '../../components/button/style.module.css';
-import * as styleLayout from '../../layout/profile/style.module.css';
 
 const router = new Router('.app');
 
 const button = new Button({
   label: 'Сохранить',
-  attr: {
-    class: styleButton.button,
-    type: 'submit',
-  },
+  type: 'submit',
 });
 
-const settingsForm = new Form('form', {
+const settingsForm = new Form({
+  name: 'formProfile',
   attr: {
     class: styleForm.profile_info,
   },
-  inputEmail: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputEmail: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Почта',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'pochta@yandex.ru',
+      name: 'email',
+      type: 'email',
       events: {
         focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
         blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
-        placeholder: 'pochta@yandex.ru',
-        name: 'email',
         class: styleInput.input_profile,
-        type: 'email',
       },
     }),
   }),
-  inputLogin: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputLogin: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Логин',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'ivanivanov',
+      name: 'login',
+      type: 'text',
       events: {
         focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
         blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
-        placeholder: 'ivanivanov',
-        name: 'login',
         class: styleInput.input_profile,
-        type: 'text',
       },
     }),
   }),
-  inputFirstName: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputFirstName: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Имя',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'Иван',
+      name: 'first_name',
+      type: 'text',
       events: {
         focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
         blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
       attr: {
-        placeholder: 'Иван',
-        name: 'first_name',
         class: styleInput.input_profile,
-        type: 'text',
       },
     }),
   }),
-  inputSecondName: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputSecondName: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Фамилия',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'Иванов',
+      name: 'second_name',
+      type: 'text',
       events: {
         focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
         blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
-      attr: {
-        placeholder: 'Иванов',
-        name: 'second_name',
-        class: styleInput.input_profile,
-        type: 'text',
-      },
+      attr: { class: styleInput.input_profile },
     }),
   }),
-  inputDisplayName: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
+  inputDisplayName: new ProfileInput({
+    attr: { class: styleInputProfile.block },
     label: 'Имя в чате',
-    input: new Input('input', {
-      attr: {
-        placeholder: 'Иван',
-        name: 'displayname',
-        class: styleInput.input_profile,
-        type: 'text',
-      },
-    }),
-  }),
-  inputPhone: new ProfileInput('div', {
-    attr: {
-      class: styleInputProfile.block,
-    },
-    label: 'Телефон',
-    input: new Input('input', {
+    input: new Input({
+      placeholder: 'Иван',
+      name: 'displayname',
+      type: 'text',
       events: {
         focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
         blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
-      attr: {
-        placeholder: '+7 (909) 967 30 30',
-        name: 'phone',
-        class: styleInput.input_profile,
-        type: 'phone',
+      attr: { class: styleInput.input_profile },
+    }),
+  }),
+  inputPhone: new ProfileInput({
+    attr: { class: styleInputProfile.block },
+    label: 'Телефон',
+    input: new Input({
+      placeholder: '+7 (909) 967 30 30',
+      name: 'phone',
+      type: 'phone',
+      events: {
+        focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
       },
+      attr: { class: styleInput.input_profile },
     }),
   }),
   button,
@@ -145,22 +128,16 @@ const settingsForm = new Form('form', {
   },
 });
 
-const SettingsPage = new ProfileLayout('div', {
-  attr: {
-    class: styleLayout.wrapper,
-  },
-  avatar: new AvatarProfile('div'),
-  form: settingsForm,
+const SettingsPage = new ProfileLayout({
   link: new Link({
     label: '<',
-    attr: {
-      // href: '/chat',
-      class: styleButton.button_round,
-    },
+    attr: { class: styleButton.button_round },
     events: {
       click: () => router.back(),
     },
   }),
+  avatar: new AvatarProfile({}),
+  form: settingsForm,
 });
 
 export default SettingsPage;
