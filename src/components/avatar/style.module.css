@@ -24,3 +24,15 @@
   width: 34px;
   height: 34px;
 }
+
+.input {
+  visibility: hidden;
+}
+
+.label {
+  border-radius: 50%;
+  background: #efefef;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto;
+}

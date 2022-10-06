@@ -1,6 +1,5 @@
 import Block from '../../utils/Block';
 import tpl from './tpl.hbs';
-import * as styles from './style.module.css';
 
 type LinkProps = {
   label: string,
@@ -13,11 +12,7 @@ type LinkProps = {
 
 export default class Link extends Block {
   constructor(props: LinkProps) {
-    super({ ...props,
-      // events: {
-      //   click: () => this.navigate()
-      // }
-    });
+    super({ ...props });
   }
   render() {
     return this.compile(tpl, { ...this.props });

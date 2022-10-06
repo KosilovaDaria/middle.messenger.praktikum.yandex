@@ -1,4 +1,4 @@
-// import Block from './Block';  // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
+import Block from './Block'; // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
 import Route from './Route';
 
 export default class Router {
@@ -20,8 +20,9 @@ export default class Router {
     Router.__instance = this;
   }
 
-  public use(pathname: string, block: any) {
-  // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
+  // public use(pathname: string, block: any) {
+  use(pathname: string, block: new() => Block) {
+  //  если передавать в индексе конструктор, а не объект
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;

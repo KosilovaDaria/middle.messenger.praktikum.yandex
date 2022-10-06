@@ -1,5 +1,5 @@
-<div>
-  <span>{{text}}</span>
+<div class="{{styles.message}}  {{#if isMyMsg}} {{ styles.message_my }} {{/if}}">
+  <span>{{content}}</span>
   <time class="{{styles.time}}">{{time}}</time>
   <img class="{{styles.hidden}}" src="{{img}}" alt="delivered">
 </div>

@@ -5,42 +5,55 @@ import SettingsPage from './pages/settingsPage/index';
 import PassPage from './pages/passPage/index';
 import ChatPage from './pages/chatPage/index';
 import { ErrorPage, ServerErrorPage } from './pages/ErrorPage/index';
-import render from './utils/render';
-import Block from './utils/Block';
 import Router from './utils/Router';
-import AuthLayout from './layout/auth/authLayout';
-import Button from './components/button/Button';
+import AuthController from './controllers/AuthController';
 
-// const routes:Record<string, Block> = {
-//   '/': LoginPage,
-//   '/login': LoginPage,
-//   '/signup': SignupPage,
-//   '/profile': ProfilePage,
-//   '/settings': SettingsPage,
-//   '/pass': PassPage,
-//   '/chat': ChatPage,
-//   '/404': ErrorPage,
-//   '/500': ServerErrorPage,
-// };
+const router = new Router('.app');
 
-// window.addEventListener('DOMContentLoaded', () => {
-//   const path = window.location.pathname;
-//   if (Object.keys(routes).find((el) => el === path)) {
-//     render('.app', routes[path]);
-//   } else {
-//     render('.app', ErrorPage);
-//   }
-// })
-window.addEventListener('DOMContentLoaded', () => {
-  const router = new Router('.app');
+enum Routes {
+  Index = '/',
+  Signup = '/sign-up',
+  Profile = '/profile',
+  Settings = '/settings',
+  Pass = '/pass',
+  Chat = '/messanger',
+  Error = '/404',
+  ServerError = '/500',
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
   router
-    .use('/', LoginPage)
-    .use('/sign-up', SignupPage)
-    .use('/profile', ProfilePage)
-    .use('/settings', SettingsPage)
-    .use('/pass', PassPage)
-    .use('/messenger', ChatPage)
-    .use('/404', ErrorPage)
-    .use('/500', ServerErrorPage)
-    .start();
+    .use(Routes.Index, LoginPage)
+    .use(Routes.Signup, SignupPage)
+    .use(Routes.Profile, ProfilePage)
+    .use(Routes.Settings, SettingsPage)
+    .use(Routes.Pass, PassPage)
+    .use(Routes.Chat, ChatPage)
+    .use(Routes.Error, ErrorPage)
+    .use(Routes.ServerError, ServerErrorPage)
+    .start()
+
+  let isProtectedRoute = true;
+
+  // eslint-disable-next-line default-case
+  switch (window.location.pathname) {
+    case Routes.Index:
+    case Routes.Signup:
+      isProtectedRoute = false;
+      break;
+  }
+  try {
+    await AuthController.fetchUser();
+    router.start();
+
+    if (!isProtectedRoute) {
+      router.go(Routes.Profile)
+    }
+  } catch (e) {
+    router.start();
+
+    if (isProtectedRoute) {
+      router.go(Routes.Index);
+    }
+  }
 })

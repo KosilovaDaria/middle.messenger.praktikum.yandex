@@ -19,7 +19,7 @@
   align-self: flex-start;
 }
 
-.message_to {
+.message_my {
   border-radius: 10px 10px 0;
   background: #e4edfd;
   align-self: flex-end;
@@ -33,5 +33,5 @@
 }
 
 .hidden {
-  display:none
+  display: none;
 }

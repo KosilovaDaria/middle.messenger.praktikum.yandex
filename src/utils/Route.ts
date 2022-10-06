@@ -1,33 +1,35 @@
 import Block from './Block';
-import render from './render';
+// import render from './render';
 
 function isEqual(lhs: any, rhs: any) {
   return lhs === rhs;
 }
-// function render(query: string, block: Block) {
-//   const root = document.querySelector(query);
+function render(query: string, block: Block) {
+  const root = document.querySelector(query);
 
-//   if (root === null) {
-//     throw new Error(`root not found by selector "${query}"`);
-//   }
-//   console.log(block)
-//   root.innerHTML = '';
+  if (root === null) {
+    throw new Error(`root not found by selector "${query}"`);
+  }
+  // console.log(block)
+  root.innerHTML = '';
 
-//   root.append(block.getContent()!);
+  root.append(block.getContent()!);
 
-//   return root;
-// }
+  return root;
+}
 
 export default class Route {
   _pathname: string;
-  // _blockClass: new() => Block; //если передавать в индексе конструктор, а не объект
-  _blockClass: any;
+  _blockClass: new() => Block;
+  // если передавать в индексе конструктор, а не объект
+  // _blockClass: any;
 
   _block: Block | null;
   // _props: { rootQuery: string; };
   _props: any;
-  constructor(pathname: string, view: any, props: { rootQuery: string; }) {
-  // constructor(pathname: string, view: new() => any, props: { rootQuery: string; }) { //если передавать в индексе конструктор, а не объект
+  // constructor(pathname: string, view: any, props: { rootQuery: string; }) {
+  constructor(pathname: string, view: new() => any, props: { rootQuery: string; }) {
+    // если передавать в индексе конструктор, а не объект
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
@@ -42,9 +44,10 @@ export default class Route {
   }
 
   leave() {
-    if (this._block) {
-      this._block.hide();
-    }
+    // if (this._block) {
+    //   this._block.hide();
+    // }
+    this._block = null
   }
 
   match(pathname: string) {
@@ -53,12 +56,12 @@ export default class Route {
 
   render() {
     if (!this._block) {
-      this._block = this._blockClass;
-      // this._block = new this._blockClass();   // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
-      render(this._props.rootQuery, this._block!);
-      return;
+      // this._block = this._blockClass;
+      this._block = new this._blockClass();
+      // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
+      render(this._props.rootQuery, this._block!)
     }
 
-    this._block.show();
+    // this._block.show();
   }
 }

@@ -1,8 +1,24 @@
-<li class="{{styles.list_item}}">
-  {{{avatar}}}
-  <div class="{{styles.item_content }}">
-    <p class="{{styles.user_name}}">{{from}}</p>
-    <p class="{{styles.user_messege}}">{{lastMessage}}</p>
+<div class="{{styles.list_block}}">
+  <div class="{{styles.link}}">
+    {{{link}}}
   </div>
-  <p class="{{styles.item_date}}">{{date}}</p>
-</li>
+  <div class="{{styles.search_block}}">
+    <input class="{{styles.search_input}}" placeholder="Поиск">
+    <div class="{{styles.button}}" data-title="Добавить новый чат">{{{button}}}</div>
+  </div>
+  {{#if noChats}}
+  <div class="{{styles.nochats_block}}">
+    <p class="{{styles.nochats_text}}">У вас пока нет чатов..</p>
+  </div>
+  {{/if}}
+  {{#if isLoaded}}
+  <ul class="{{styles.chat_list}}">
+    {{#each chatItem}}
+    {{{ this }}}
+    {{/each}}
+  </ul>
+  {{!-- {{else}}
+  Loading... --}}
+  {{/if}}
+  {{{modalBlock}}}
+</div>

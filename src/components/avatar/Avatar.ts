@@ -3,7 +3,11 @@ import tpl from './tpl.hbs';
 import * as styles from './style.module.css';
 
 type AvatarProps = {
-  attr?: Record<string, string>
+  attr?: Record<string, string>;
+  path?: string;
+  events?:{
+    click:() => {}
+  }
 }
 
 export default class Avatar extends Block<AvatarProps> {

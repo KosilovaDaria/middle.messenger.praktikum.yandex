@@ -2,7 +2,7 @@ import { v4 as makeUUID } from 'uuid';
 import EventBus from './EventBus';
 import '../style.css';
 
-export default class Block<P extends Record<string, any> = any | {}> {
+export default class Block<P extends Record<string, any> = any > {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -10,12 +10,11 @@ export default class Block<P extends Record<string, any> = any | {}> {
     FLOW_CDU: 'flow:component-did-update',
   } as const;
 
-  public _id = makeUUID(6);
+  public _id = makeUUID();
   protected props: P;
-  public children: Record<string, Block>;
+  public children: Record<string, any | any[]>;
   private eventBus: () => EventBus;
   protected _element: HTMLElement | null = null;
-  // private _meta: { tagName: string; props: P; };
 
   /** JSDoc
    * @param {string} tagName
@@ -23,18 +22,11 @@ export default class Block<P extends Record<string, any> = any | {}> {
    *
    * @returns {void}
    */
-  // constructor(tagName = 'div', propsAndChildren: P = {} as P) {
-  constructor(propsAndChildren: P = {} as P) {
+  constructor(propsAndChildren: P) {
     const eventBus = new EventBus();
 
     const { props, children } = this._getChildren(propsAndChildren);
     this.children = children;
-
-    // this._meta = {
-    //   tagName,
-    //   props: props as P,
-    // };
-
     this.props = this._makePropsProxy(props);
 
     this.eventBus = () => eventBus;
@@ -42,11 +34,14 @@ export default class Block<P extends Record<string, any> = any | {}> {
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
-  _getChildren(propsAndChildren: P): { props: P, children: Record<string, Block> } {
-    const children: Record<string, Block> = {};
+  _getChildren(propsAndChildren: P): { props: P, children: Record<string, Block | Block[]> } {
+    const children: Record<string, Block | Block[]> = {};
     const props: Record<string, unknown> = {};
+
     Object.entries(propsAndChildren).forEach(([key, value]) => {
-      if (value instanceof Block) {
+      if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+        children[key as string] = value;
+      } else if (value instanceof Block) {
         children[key as string] = value;
       } else {
         props[key] = value;
@@ -77,14 +72,7 @@ export default class Block<P extends Record<string, any> = any | {}> {
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
   }
-
-  // _createResources() {
-  //   const { tagName } = this._meta;
-  //   this._element = this._createDocumentElement(tagName);
-  // }
-
   private _init() {
-    // this._createResources();
     this.init();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
@@ -98,7 +86,13 @@ export default class Block<P extends Record<string, any> = any | {}> {
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-    Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
+    Object.values(this.children).forEach(child => {
+      if (Array.isArray(child)) {
+        child.forEach(ch => ch.dispatchComponentDidMount());
+      } else {
+        child.dispatchComponentDidMount();
+      }
+    });
   }
 
   private _componentDidUpdate(oldProps: P, newProps: P) {
@@ -109,7 +103,7 @@ export default class Block<P extends Record<string, any> = any | {}> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  private componentDidUpdate(_oldProps: P, _newProps: P) {
+  public componentDidUpdate(_oldProps: P, _newProps: P) {
     return true;
   }
 
@@ -117,20 +111,35 @@ export default class Block<P extends Record<string, any> = any | {}> {
     const propsAndStubs = { ...props };
 
     Object.entries(this.children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+      if (Array.isArray(child)) {
+        propsAndStubs[key] = child.map(item => `<div data-id="${item._id}"></div>`)
+      } else {
+        propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+      }
     });
 
     const fragment = this._createDocumentElement('template');
 
     fragment.innerHTML = template(propsAndStubs);
-    Object.entries(this.children).forEach(([_, child]) => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+
+    const replaceStub = (component: Block) => {
+      const stub = fragment.content.querySelector(`[data-id="${component._id}"]`);
+
       if (!stub) {
         return;
       }
-      // console.log(stub.childNodes)
-      // child.getContent()?.append(...Array.from(stub.childNodes));
-      stub.replaceWith(child.getContent()!);
+
+      // component.getContent()?.append(...Array.from(stub!.childNodes));
+
+      stub.replaceWith(component.getContent()!);
+    }
+
+    Object.entries(this.children).forEach(([_, component]) => {
+      if (Array.isArray(component)) {
+        component.forEach(replaceStub);
+      } else {
+        replaceStub(component);
+      }
     });
     return fragment.content;
   }
@@ -145,13 +154,14 @@ export default class Block<P extends Record<string, any> = any | {}> {
     const self = this;
 
     const proxyProps = new Proxy(props, {
-      get(target, prop) {
-        const value = target[prop as keyof P];
+      get(target, prop: string) {
+        const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop: string, val) {
+        const oldTarget = { ...target }
         target[prop as keyof P] = val;
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
       deleteProperty() {
@@ -162,7 +172,7 @@ export default class Block<P extends Record<string, any> = any | {}> {
     return proxyProps;
   }
 
-  setProps = (nextProps: P) => {
+  setProps = (nextProps: Partial<P>) => {
     if (!nextProps) {
       return;
     }
@@ -175,13 +185,6 @@ export default class Block<P extends Record<string, any> = any | {}> {
   }
 
   private _render() {
-    // const block = this.render();
-    // this._removeEvents();
-    // this._element!.innerHTML = '';
-    // console.log(this._element!)
-    // this._element!.append(block);
-    // this._addEvents();
-    // this.addAttribute();
     const block = this.render();
     this._removeEvents();
     const newElement = block.firstElementChild as HTMLElement;
@@ -206,22 +209,8 @@ export default class Block<P extends Record<string, any> = any | {}> {
     element.setAttribute('data-id', this._id);
     return element;
   }
-
-  show() {
-    console.log(this.getContent())
-    // this.getContent()!.style.display = 'block';
-    this.getContent()!.classList.remove('visually_hidden');
-
-    // this._element.classList.remove('hidden');
-  }
-
-  hide() {
-    // this.getContent()!.style.display = 'none';
-    this.getContent()!.classList.add('visually_hidden');
-
-    // this._element.classList.add('hidden');
-  }
 }
+
 // import { v4 as makeUUID } from 'uuid';
 // import EventBus from './EventBus';
 // import '../style.css';
@@ -234,12 +223,11 @@ export default class Block<P extends Record<string, any> = any | {}> {
 //     FLOW_CDU: 'flow:component-did-update',
 //   } as const;
 
-//   public _id = makeUUID(6);
+//   public _id = makeUUID();
 //   protected props: P;
-//   public children: Record<string, Block>;
+//   public children: Record<string, Block | Block[]>;
 //   private eventBus: () => EventBus;
-//   private _element: HTMLElement | null = null;
-//   private _meta: { tagName: string; props: P; };
+//   protected _element: HTMLElement | null = null;
 
 //   /** JSDoc
 //    * @param {string} tagName
@@ -247,17 +235,17 @@ export default class Block<P extends Record<string, any> = any | {}> {
 //    *
 //    * @returns {void}
 //    */
-
-//   constructor(tagName = 'div', propsAndChildren: P = {} as P) {
+//   // constructor(tagName = 'div', propsAndChildren: P = {} as P) {
+//   constructor(propsAndChildren: P = {} as P) {
 //     const eventBus = new EventBus();
 
 //     const { props, children } = this._getChildren(propsAndChildren);
 //     this.children = children;
 
-//     this._meta = {
-//       tagName,
-//       props: props as P,
-//     };
+//     // this._meta = {
+//     //   tagName,
+//     //   props: props as P,
+//     // };
 
 //     this.props = this._makePropsProxy(props);
 
@@ -266,13 +254,15 @@ export default class Block<P extends Record<string, any> = any | {}> {
 //     this._registerEvents(eventBus);
 //     eventBus.emit(Block.EVENTS.INIT);
 //   }
-//   _getChildren(propsAndChildren: P): { props: P, children: Record<string, Block> } {
-//     const children: Record<string, Block> = {};
+//   _getChildren(propsAndChildren: P): { props: P, children: Record<string, Block | Block[]> } {
+//     const children: Record<string, Block | Block[]> = {};
 //     const props: Record<string, unknown> = {};
+
 //     Object.entries(propsAndChildren).forEach(([key, value]) => {
-//       if (value instanceof Block) {
+//       if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
 //         children[key as string] = value;
-//         // console.log(children)
+//       } else if (value instanceof Block) {
+//         children[key as string] = value;
 //       } else {
 //         props[key] = value;
 //       }
@@ -303,13 +293,13 @@ export default class Block<P extends Record<string, any> = any | {}> {
 //     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
 //   }
 
-//   _createResources() {
-//     const { tagName } = this._meta;
-//     this._element = this._createDocumentElement(tagName);
-//   }
+//   // _createResources() {
+//   //   const { tagName } = this._meta;
+//   //   this._element = this._createDocumentElement(tagName);
+//   // }
 
 //   private _init() {
-//     this._createResources();
+//     // this._createResources();
 //     this.init();
 //     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 //   }
@@ -323,7 +313,13 @@ export default class Block<P extends Record<string, any> = any | {}> {
 
 //   public dispatchComponentDidMount() {
 //     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-//     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
+//     Object.values(this.children).forEach(child => {
+//       if (Array.isArray(child)) {
+//         child.forEach(ch => ch.dispatchComponentDidMount());
+//       } else {
+//         child.dispatchComponentDidMount();
+//       }
+//     });
 //   }
 
 //   private _componentDidUpdate(oldProps: P, newProps: P) {
@@ -334,7 +330,7 @@ export default class Block<P extends Record<string, any> = any | {}> {
 //     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 //   }
 
-//   private componentDidUpdate(_oldProps: P, _newProps: P) {
+//   public componentDidUpdate(oldProps: P, newProps: P) {
 //     return true;
 //   }
 
@@ -342,20 +338,35 @@ export default class Block<P extends Record<string, any> = any | {}> {
 //     const propsAndStubs = { ...props };
 
 //     Object.entries(this.children).forEach(([key, child]) => {
-//       propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+//       if (Array.isArray(child)) {
+//         propsAndStubs[key] = child.map(item => `<div data-id="${item._id}"></div>`)
+//       } else {
+//         propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+//       }
 //     });
 
 //     const fragment = this._createDocumentElement('template');
 
 //     fragment.innerHTML = template(propsAndStubs);
-//     Object.entries(this.children).forEach(([_, child]) => {
-//       const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+
+//     const replaceStub = (component: Block) => {
+//       const stub = fragment.content.querySelector(`[data-id="${component._id}"]`);
+
 //       if (!stub) {
 //         return;
 //       }
-//       // console.log(stub.childNodes)
-//       // child.getContent()?.append(...Array.from(stub.childNodes));
-//       stub.replaceWith(child.getContent()!);
+
+//       // component.getContent()?.append(...Array.from(stub!.childNodes));
+
+//       stub.replaceWith(component.getContent()!);
+//     }
+
+//     Object.entries(this.children).forEach(([_, component]) => {
+//       if (Array.isArray(component)) {
+//         component.forEach(replaceStub);
+//       } else {
+//         replaceStub(component);
+//       }
 //     });
 //     return fragment.content;
 //   }
@@ -402,8 +413,11 @@ export default class Block<P extends Record<string, any> = any | {}> {
 //   private _render() {
 //     const block = this.render();
 //     this._removeEvents();
-//     this._element!.innerHTML = '';
-//     this._element!.append(block);
+//     const newElement = block.firstElementChild as HTMLElement;
+//     if (this._element && newElement) {
+//       this._element.replaceWith(newElement);
+//     }
+//     this._element = newElement;
 //     this._addEvents();
 //     this.addAttribute();
 //   }
@@ -420,21 +434,6 @@ export default class Block<P extends Record<string, any> = any | {}> {
 //     const element = document.createElement(tagName);
 //     element.setAttribute('data-id', this._id);
 //     return element;
-//   }
-
-//   show() {
-//     console.log(this.getContent())
-//     // this.getContent()!.style.display = 'block';
-//     this.getContent()!.classList.remove('visually_hidden');
-
-//     // this._element.classList.remove('hidden');
-//   }
-
-//   hide() {
-//     // this.getContent()!.style.display = 'none';
-//     this.getContent()!.classList.add('visually_hidden');
-
-//     // this._element.classList.add('hidden');
 //   }
 // }
 

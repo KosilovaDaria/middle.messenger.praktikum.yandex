@@ -30,7 +30,8 @@ export default class EventBus<E extends Record<string, string> = Record<string, 
 
   emit<Event extends MapInterface<E>>(event:Event, ...args: Args[Event]) {
     if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
+      return;
+      // throw new Error(`Нет события: ${event}`);
     }
 
     this.listeners[event]!.forEach((listener) => {

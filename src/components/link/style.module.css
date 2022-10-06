@@ -1,6 +1,7 @@
 .link_block {
   padding: 10px 0;
   color: #3369f3;
+  cursor: pointer;
 }
 
 .link_controls {
@@ -8,9 +9,12 @@
   color: #3369f3;
   border-bottom: 1px solid #eaeaea;
   padding: 10px 0;
+  cursor: pointer;
 }
 
+.link_delete,
 .link_controls:nth-child(3n) {
   color: red;
   border-bottom: none;
+  cursor: pointer;
 }
