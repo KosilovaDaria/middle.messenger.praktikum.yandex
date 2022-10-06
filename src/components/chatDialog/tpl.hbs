@@ -1,17 +1,29 @@
-<div class="{{headerClass}}">
-  <div class="{{infoClass}}">
-    {{{avatar}}}
-    <p>{{name}}</p>
+<div class="{{styles.dialog_block }}">
+  {{#if selectedChat}}
+  <div class="{{styles.dialog_header}}">
+    <div class="{{styles.dialog_info}}">
+      {{!-- {{{avatar}}} --}}
+      {{!-- <p>{{title}}</p> --}}
+    </div>
+    <div class="{{styles.header_tools}}">
+      {{{addUser}}} |
+      {{{deleteChat}}}
+    </div>
   </div>
-  <div class="{{toolsClass}}"></div>
+  <div class="{{styles.dialog_container }}">
+    <p class="{{styles.dialog_date}}">{{date}}</p>
+    {{#each messages}}
+    {{{this}}}
+    {{/each}}
+  </div>
+  <div class="{{styles.dialog_input}}">
+    <button class="{{styles.button_attach}}"><img src="{{img}}" alt="btn-attach"></button>
+    {{{input}}}
+    {{{button}}}
+  </div>
+  {{else}}
+  <div class="{{styles.nodialog}}">Выберете чат чтобы отправить сообщение</div>
+  {{/if}}
+  {{{modalAddUser}}}
 </div>
-<div class="{{containerClass}}">
-  <p class="{{dateClass}}">{{date}}</p>
-  {{{messegeFrom}}}
-  {{{messegeTo}}}
-</div>
-<div class="{{inputBlockClass}}">
-  <button class="{{btnClass}}"><img src="{{img}}" alt="btn-attach"></button>
-  {{{input}}} 
-  {{{button}}}
-</div>
+

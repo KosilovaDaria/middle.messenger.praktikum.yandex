@@ -23,14 +23,8 @@
   font-size: 20px;
 }
 
-.form {
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.link_block > a {
+.link_block > span {
+  color: #3369f3;
   text-decoration: none;
   display: block;
   font-size: 12px;

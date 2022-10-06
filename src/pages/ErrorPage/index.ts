@@ -1,34 +1,49 @@
-import ErrorLayout from '../../layout/error/errorLayout';
+// eslint-disable-next-line max-classes-per-file
 import Link from '../../components/link/Link';
-import * as styleError from '../../layout/error/style.module.css';
 import * as styleLink from '../../components/link/style.module.css';
 
-export const ErrorPage = new ErrorLayout('div', {
-  attr: {
-    class: styleError.wrapper,
-  },
-  errorCode: '404',
-  errorMessege: 'Не туда попали',
-  link: new Link({
-    attr: {
-      class: styleLink.link_block,
-      href: '/chat',
-    },
-    label: 'Назад к чатам',
-  }),
-});
+import Router from '../../utils/Router';
+import Block from '../../utils/Block';
+import tpl from '../../layout/error/tpl.hbs';
+import * as styles from '../../layout/error/style.module.css';
 
-export const ServerErrorPage = new ErrorLayout('div', {
-  attr: {
-    class: styleError.wrapper,
-  },
-  errorCode: '500',
-  errorMessege: 'Мы уже фиксим',
-  link: new Link({
-    label: 'Назад к чатам',
-    attr: {
-      class: styleLink.link_block,
-      href: '/chat',
-    },
-  }),
-});
+const router = new Router('.app');
+
+export class ErrorPage extends Block {
+  constructor() {
+    super({})
+  }
+  protected init() {
+    this.props.errorCode = '404';
+    this.props.errorMessage = 'Не туда попали';
+    this.children.link = new Link({
+      label: 'Назад к чатам',
+      attr: { class: styleLink.link_block },
+      events: {
+        click: () => router.go('/messanger'),
+      },
+    });
+  }
+  render() {
+    return this.compile(tpl, { ...this.props, styles })
+  }
+}
+export class ServerErrorPage extends Block {
+  constructor() {
+    super({})
+  }
+  protected init() {
+    this.props.errorCode = '500';
+    this.props.errorMessage = 'Мы уже фиксим';
+    this.children.link = new Link({
+      label: 'Назад к чатам',
+      attr: { class: styleLink.link_block },
+      events: {
+        click: () => router.go('/messanger'),
+      },
+    });
+  }
+  render() {
+    return this.compile(tpl, { ...this.props, styles })
+  }
+}

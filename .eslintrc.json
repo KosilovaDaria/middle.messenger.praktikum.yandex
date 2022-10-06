@@ -20,6 +20,8 @@
     "class-methods-use-this": "off",
     "no-useless-escape": "off",
     "@typescript-eslint/no-unused-expressions": "off",
-    "func-names": "off"
+    "func-names": "off",
+    "no-constructor-return": "off",
+    "no-undef": "off"
     }
 }
