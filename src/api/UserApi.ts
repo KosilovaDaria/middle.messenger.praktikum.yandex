@@ -1,4 +1,4 @@
-import BaseAPI from './BaseAPI';
+import BaseAPI from './BaseApi';
 
 export type UserData = {
   first_name: string,
