@@ -15,6 +15,16 @@ main {
   height: 100vh;
 }
 
+.app {
+  --white-color: #fff;
+  --red-color: red;
+  --bg-gray-color: #efefef;
+  --text-gray-color: #999;
+  --bg-blue-color: #3369f3;
+  --selected-color: #e4edfd;
+  --overlay-color: rgba(0 0 0 / 50%);
+}
+
 .visually_hidden {
   position: absolute;
   clip: rect(0 0 0 0);

@@ -9,7 +9,7 @@
 
 .nodialog {
   margin: auto 0;
-  color: #999;
+  color: var(--text-gray-color);
 }
 
 .dialog_header {
@@ -35,12 +35,12 @@
   justify-content: flex-end;
   padding-bottom: 30px;
   box-sizing: border-box;
-  border-top: 1px solid lightgray;
+  border-top: 1px solid var(--bg-gray-color);
 }
 
 .dialog_date {
   margin: 20px auto;
-  color: #999;
+  color: var(--text-gray-color);
 }
 
 .dialog_input {
@@ -50,7 +50,7 @@
   flex-wrap: nowrap;
   align-items: center;
   padding: 10px 0;
-  border-top: 1px solid lightgray;
+  border-top: 1px solid var(--bg-gray-color);
 }
 
 .messege_input {
@@ -58,7 +58,7 @@
   min-height: 32px;
   border-radius: 20px;
   border: none;
-  background: #efefef;
+  background: var(--bg-gray-color);
   padding: 0 20px;
   margin: 0 10px;
 }

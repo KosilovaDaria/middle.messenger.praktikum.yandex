@@ -4,7 +4,7 @@ import * as styles from './style.module.css';
 
 type ButtonProps = {
   label: string;
-  type? : string;
+  type? : 'submit' | 'button';
   attr?: Record<string, string>,
   events?: {
     click: () => void;

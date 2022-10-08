@@ -18,6 +18,7 @@ import Avatar from '../../components/avatar/Avatar';
 import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
 import store, { StoreEvents } from '../../utils/Store';
+import { urlRecources } from '../../config';
 
 const router = new Router('.app');
 const fieldsOrder = ['email', 'login', 'first_name', 'second_name', 'display_name', 'phone'];
@@ -27,7 +28,7 @@ class ProfilePage extends Block {
     super({})
   }
   componentDidUpdate(_oldProps: any, newProps: any): boolean {
-    const avatarPath = `https://ya-praktikum.tech/api/v2/resources${newProps.avatar}`;
+    const avatarPath = `${urlRecources}${newProps.avatar}`;
     const avatar = document.getElementById('avatarImage');
     avatar?.setAttribute('src', avatarPath);
 

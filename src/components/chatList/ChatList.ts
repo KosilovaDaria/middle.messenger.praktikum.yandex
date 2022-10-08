@@ -70,7 +70,6 @@ class ChatListBase extends Block<ChatListProps> {
       }),
     })
     this.children.chatItem = this.createChats(this.props)
-    console.log(this.children)
   }
   componentDidUpdate(_oldProps: ChatListProps, newProps: ChatListProps): boolean {
     this.children.chatItem = this.createChats(newProps);
@@ -80,6 +79,7 @@ class ChatListBase extends Block<ChatListProps> {
   private createChats(props: ChatListProps) {
     return props.chats!.map(data => new ChatItem({
       ...data,
+      // last_message
       events: {
         click: () => {
           ChatController.selectChat(data.id);

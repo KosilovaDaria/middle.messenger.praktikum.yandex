@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import store from '../utils/Store';
 import WSTransport, { WSTransportEvents } from '../utils/WSTransport';
+import { urlWSTransport } from '../config';
 
 export type Message = {
   chat_id: number;
@@ -27,7 +28,7 @@ class MessageController {
     }
     const userId = store.getState().user?.id;
 
-    const wsTransport = new WSTransport(`wss://ya-praktikum.tech/ws/chats/${userId}/${id}/${token}`);
+    const wsTransport = new WSTransport(`${urlWSTransport}/${userId}/${id}/${token}`);
 
     this.sockets.set(id, wsTransport);
 

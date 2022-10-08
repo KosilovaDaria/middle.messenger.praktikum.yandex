@@ -13,14 +13,14 @@ class UserController {
     try {
       await this.api.searchuser(login);
     } catch (e: any) {
-      console.log(e);
+      alert(e);
     }
   }
   async getuser(id: number) {
     try {
       await this.api.getuser(id);
     } catch (e: any) {
-      console.log(e);
+      alert(e);
     }
   }
   async editprofile(data: UserData) {
@@ -28,7 +28,7 @@ class UserController {
       await this.api.editprofile(data);
       router.go('/profile');
     } catch (e: any) {
-      console.error(e);
+      alert(e);
     }
   }
   async editavatar(data: any) {
@@ -36,7 +36,7 @@ class UserController {
       await this.api.editavatar(data);
       router.go('/profile');
     } catch (e: any) {
-      console.error(e);
+      alert(e);
     }
   }
   async editpassword(data: UserPassword) {
@@ -44,7 +44,7 @@ class UserController {
       await this.api.editpassword(data);
       router.go('/profile');
     } catch (e: any) {
-      console.error(e);
+      alert(e);
     }
   }
   async fetchUsers(login: string) {

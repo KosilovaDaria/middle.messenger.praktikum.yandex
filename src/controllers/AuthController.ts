@@ -16,7 +16,7 @@ class AuthController {
       await this.api.signin(data);
       router.go('/messanger');
     } catch (e: any) {
-      console.error(e);
+      alert(e);
     }
   }
 
@@ -26,13 +26,17 @@ class AuthController {
       await this.fetchUser();
       router.go('/profile');
     } catch (e: any) {
-      console.error(e.message);
+      alert(e.message);
     }
   }
 
   async fetchUser() {
-    const user = await this.api.read();
-    store.set('user', user);
+    try {
+      const user = await this.api.read();
+      store.set('user', user);
+    } catch (e: any) {
+      alert(e.message);
+    }
   }
 
   async logout() {
@@ -40,7 +44,7 @@ class AuthController {
       await this.api.logout();
       router.go('/');
     } catch (e: any) {
-      console.error(e.message);
+      alert(e.message);
     }
   }
 }

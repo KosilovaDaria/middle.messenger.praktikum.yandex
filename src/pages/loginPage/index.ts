@@ -53,7 +53,6 @@ export default class LoginPage extends Block {
         submit: (e) => {
           e.preventDefault();
           const data = formValidation(e.target) as SigninData
-          console.log(data)
           AuthController.signin(data)
         },
       },

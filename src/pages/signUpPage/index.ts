@@ -95,8 +95,6 @@ export default class SignupPage extends Block {
         submit: (e) => {
           e.preventDefault();
           const data = formValidation(e.target) as SignupData
-          console.log(data)
-
           AuthController.signup(data)
         },
       },

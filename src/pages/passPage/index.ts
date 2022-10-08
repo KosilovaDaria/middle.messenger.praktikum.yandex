@@ -21,6 +21,7 @@ import store, { StoreEvents } from '../../utils/Store';
 import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
 import { UserPassword } from '../../api/UserApi';
+import { urlRecources } from '../../config';
 
 const router = new Router('.app');
 
@@ -30,7 +31,7 @@ class PassPage extends Block {
   }
 
   componentDidUpdate(oldProps: any, newProps: any) {
-    const avatarPath = `https://ya-praktikum.tech/api/v2/resources${newProps.avatar}`;
+    const avatarPath = `${urlRecources}${newProps.avatar}`;
     const avatar = document.getElementById('avatarImage');
     avatar?.setAttribute('src', avatarPath);
 
@@ -116,7 +117,6 @@ class PassPage extends Block {
         submit: (e) => {
           e.preventDefault();
           const data = formValidation(e.target) as UserPassword
-          console.log(data)
           UserController.editpassword(data)
         },
       },
