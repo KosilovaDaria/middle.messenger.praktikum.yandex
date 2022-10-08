@@ -15,20 +15,20 @@
 
 .message_from {
   border-radius: 10px;
-  background: #f8f8f8;
+  background: var(--white-color);
   align-self: flex-start;
 }
 
 .message_my {
   border-radius: 10px 10px 0;
-  background: #e4edfd;
+  background: var(--selected-color);
   align-self: flex-end;
 }
 
 .time {
   font-size: 10px;
   text-align: right;
-  color: #999;
+  color: var(--text-gray-color);
   margin-left: 10px;
 }
 

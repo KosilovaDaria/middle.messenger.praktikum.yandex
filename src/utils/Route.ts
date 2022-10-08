@@ -10,7 +10,6 @@ function render(query: string, block: Block) {
   if (root === null) {
     throw new Error(`root not found by selector "${query}"`);
   }
-  // console.log(block)
   root.innerHTML = '';
 
   root.append(block.getContent()!);
@@ -44,9 +43,6 @@ export default class Route {
   }
 
   leave() {
-    // if (this._block) {
-    //   this._block.hide();
-    // }
     this._block = null
   }
 
@@ -61,7 +57,5 @@ export default class Route {
       // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
       render(this._props.rootQuery, this._block!)
     }
-
-    // this._block.show();
   }
 }

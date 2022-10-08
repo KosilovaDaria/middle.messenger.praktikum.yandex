@@ -20,6 +20,7 @@ import AuthController from '../../controllers/AuthController';
 import UserController from '../../controllers/UserController';
 import store, { StoreEvents } from '../../utils/Store';
 import { UserData } from '../../api/UserApi';
+import { urlRecources } from '../../config';
 
 const router = new Router('.app');
 class SettingsPage extends Block {
@@ -28,7 +29,7 @@ class SettingsPage extends Block {
   }
 
   componentDidUpdate(_oldProps: any, newProps: any) {
-    const avatarPath = `https://ya-praktikum.tech/api/v2/resources${newProps.avatar}`;
+    const avatarPath = `${urlRecources}${newProps.avatar}`;
     const avatar = document.getElementById('avatarImage');
     avatar?.setAttribute('src', avatarPath);
     const fieldsOrder = ['email', 'login', 'first_name', 'second_name', 'display_name', 'phone'];
@@ -169,9 +170,7 @@ class SettingsPage extends Block {
         submit: (e) => {
           e.preventDefault();
           const data = formValidation(e.target) as UserData
-          console.log(data)
           UserController.editprofile(data)
-        // router.go('/messenger')
         },
       },
     });

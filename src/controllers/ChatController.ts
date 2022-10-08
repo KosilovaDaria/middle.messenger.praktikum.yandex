@@ -12,7 +12,7 @@ class ChatController {
     try {
       await this.api.create(title);
     } catch (e: any) {
-      console.error(e);
+      alert(e.message);
     }
     this.fetchChats()
   }
@@ -30,7 +30,7 @@ class ChatController {
       await this.api.addUsers(id, [userId]);
       this.fetchChats()
     } catch (e: any) {
-      console.error(e);
+      alert(e);
     }
   }
   async addChatAvatar(data: any) {
@@ -38,7 +38,7 @@ class ChatController {
       await this.api.addChatAvatar(data);
       this.fetchChats()
     } catch (e: any) {
-      console.error(e);
+      alert(e);
     }
   }
   async getUsers(id:number) {
@@ -48,9 +48,9 @@ class ChatController {
     try {
       await this.api.delete(id);
     } catch (e: any) {
-      console.error(e);
+      alert(e);
     }
-    this.fetchChats()
+    await this.fetchChats()
   }
   selectChat(id:number) {
     store.set('selectedChat', id);

@@ -12,7 +12,7 @@
 .valid_message {
   font-size: 10px;
   display: none;
-  color: red;
+  color: var(--red-color);
 }
 
 .profile_info {

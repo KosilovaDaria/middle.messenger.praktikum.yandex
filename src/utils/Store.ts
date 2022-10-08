@@ -14,13 +14,28 @@ type State = {
   user: User;
   chats: ChatInfo[];
   messages: Record<number, MessageInfo[]>;
-  selectedChat?: number;
-  createdChat?: number;
+  selectedChat?: number | undefined;
+  users: User[]
 
 }
 
 export class Store extends EventBus {
-  private state: any = {};
+  private state: State = {
+    user: {
+      id: 0,
+      first_name: '',
+      second_name: '',
+      login: '',
+      email: '',
+      password: '',
+      phone: '',
+      avatar: '',
+    },
+    chats: [],
+    messages: [],
+    selectedChat: undefined,
+    users: [],
+  };
 
   public set(keypath: string, data: unknown) {
     set(this.state, keypath, data);

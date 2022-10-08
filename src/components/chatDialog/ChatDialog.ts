@@ -19,7 +19,7 @@ import ChatController from '../../controllers/ChatController';
 
 type ChatDialogProps = {
   img?: any,
-  selectedChat: number | undefined;
+  selectedChat: number ;
   messages: MessageInfo[];
   userId: number;
 }
@@ -70,14 +70,13 @@ class ChatDialogBase extends Block<ChatDialogProps> {
         label: 'Добавить',
         type: 'submit',
         events: {
-          click: () => {
+          click: async () => {
             const input = this.children.modalAddUser.children.input as Input
             const userLogin = input.getValue();
-            input.setValue('')
-            UserController.fetchUsers(userLogin).then(({ id }) => {
-              ChatController.addUserToChat(store.getState().selectChat, id)
-            });
-            (this.children.modalAddUser as Block).setProps({ isOpen: false })
+            input.setValue('');
+            const response = await UserController.fetchUsers(userLogin);
+            await ChatController.addUserToChat(store.getState().selectChat, response.id);
+            (this.children.modalAddUser as Block).setProps({ isOpen: false });
           },
         },
       }),
@@ -102,7 +101,6 @@ class ChatDialogBase extends Block<ChatDialogProps> {
           }
           const input = this.children.input as Input
           const messageFromInput = input.getValue();
-          console.log(messageFromInput)
           input.setValue('')
 
           MessageController.sendMessage(this.props.selectedChat!, messageFromInput);

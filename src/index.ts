@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   switch (window.location.pathname) {
     case Routes.Index:
     case Routes.Signup:
-      isProtectedRoute = false;
+      isProtectedRoute = true;
       break;
   }
   try {
