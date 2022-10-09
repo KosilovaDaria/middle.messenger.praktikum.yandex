@@ -3,19 +3,23 @@ import tpl from './tpl.hbs';
 
 type LinkProps = {
   label: string,
-  attr: Record<string, any>
+  to?: string,
+  attr?: Record<string, string>,
+  events?: {
+    click: () => void;
+  }
 }
 
 export default class Link extends Block {
   constructor(props: LinkProps) {
-    super('a', props);
+    super({ ...props });
   }
   render() {
     return this.compile(tpl, { ...this.props });
   }
 
   addEvents() {
-    this._element!.querySelectorAll('a').forEach((a: any) => {
+    this._element!.querySelectorAll('span').forEach((a: any) => {
       a.addEventListener('click', this.props.events.click);
     });
   }

@@ -1,3 +1,10 @@
+.form {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .input_group {
   margin-bottom: 40px;
 }
@@ -5,7 +12,7 @@
 .valid_message {
   font-size: 10px;
   display: none;
-  color: red;
+  color: var(--red-color);
 }
 
 .profile_info {

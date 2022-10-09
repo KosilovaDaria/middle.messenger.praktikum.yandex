@@ -7,11 +7,11 @@
 
 .back_block {
   width: 64px;
-  background: #fbfbfb;
+  background: var(--white-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  border-right: 2px solid #eaeaea;
+  border-right: 2px solid var(--bg-gray-color);
 }
 
 .profile_block {

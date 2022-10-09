@@ -1,137 +1,106 @@
+import Block from '../../utils/Block';
+import tpl from '../../layout/auth/tpl.hbs';
+import * as styles from '../../layout/auth/style.module.css';
 import Form from '../../components/form/Form';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';
 import Link from '../../components/link/Link';
-import AuthLayout from '../../layout/auth/authLayout';
 import {
   isValid, showMessage, hideMessage, formValidation,
 } from '../../utils/validator';
+import Router from '../../utils/Router';
+import AuthController from '../../controllers/AuthController';
+import { SignupData } from '../../api/AuthApi';
 
-import * as styleInput from '../../components/input/style.module.css';
-import * as styleButton from '../../components/button/style.module.css';
-import * as styleLink from '../../components/link/style.module.css';
-import * as styleLayout from '../../layout/auth/style.module.css';
+const router = new Router('.app');
+export default class SignupPage extends Block {
+  constructor() {
+    super({})
+  }
 
-const button = new Button({
-  label: 'Зарегистрироваться',
-  attr: {
-    class: styleButton.button,
-    type: 'submit',
-  },
-});
+  init() {
+    this.children.link = new Link({
+      label: 'Войти',
+      events: {
+        click: () => router.go('/'),
+      },
+    });
 
-const link = new Link({
-  label: 'Войти',
-  attr: {
-    class: styleLink.link_block,
-    href: '/login',
-  },
-});
-
-const form = new Form('form', {
-  attr: {
-    class: styleLayout.form,
-  },
-  inputEmail: new Input('input', {
-    attr: {
-      placeholder: 'Почта',
-      name: 'email',
-      class: styleInput.input,
-      type: 'email',
-    },
-    events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-    },
-  }),
-  inputLogin: new Input('input', {
-    attr: {
-      placeholder: 'Логин',
-      name: 'login',
-      class: styleInput.input,
-      type: 'text',
-    },
-    events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-    },
-  }),
-  inputFirstName: new Input('input', {
-    attr: {
-      placeholder: 'Имя',
-      name: 'first_name',
-      class: styleInput.input,
-      type: 'text',
-    },
-    events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-    },
-  }),
-  inputSecondName: new Input('input', {
-    attr: {
-      placeholder: 'Фамилия',
-      name: 'second_name',
-      class: styleInput.input,
-      type: 'text',
-    },
-    events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-    },
-  }),
-  inputPhone: new Input('input', {
-    attr: {
-      placeholder: 'Телефон',
-      name: 'phone',
-      class: styleInput.input,
-      type: 'tel',
-    },
-    events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-    },
-  }),
-  inputPass: new Input('input', {
-    attr: {
-      placeholder: 'Пароль',
-      name: 'password',
-      class: styleInput.input,
-      type: 'password',
-    },
-    events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-    },
-  }),
-  inputPassRpt: new Input('input', {
-    attr: {
-      placeholder: 'Пароль (еще раз)',
-      name: 'passwordrpt',
-      class: styleInput.input,
-      type: 'password',
-    },
-    events: {
-      focus: (e: any) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-      blur: (e: any) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
-    },
-  }),
-  button,
-  events: {
-    submit: (e: any) => {
-      e.preventDefault();
-      console.log(formValidation(e.target))
-    },
-  },
-});
-
-const SignupPage = new AuthLayout('div', {
-  attr: {
-    class: styleLayout.wrapper,
-  },
-  title: 'Регистрация',
-  form,
-  link,
-});
-
-export default SignupPage;
+    this.children.form = new Form({
+      name: 'formSignin',
+      inputEmail: new Input({
+        placeholder: 'Почта',
+        name: 'email',
+        type: 'email',
+        events: {
+          focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+          blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        },
+      }),
+      inputLogin: new Input({
+        placeholder: 'Логин',
+        name: 'login',
+        type: 'text',
+        events: {
+          focus: (e) => (isValid(e.target.name, e.target?.value) ? showMessage(e.target) : hideMessage(e.target)),
+          blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        },
+      }),
+      inputFirstName: new Input({
+        placeholder: 'Имя',
+        name: 'first_name',
+        type: 'text',
+        events: {
+          focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+          blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        },
+      }),
+      inputSecondName: new Input({
+        placeholder: 'Фамилия',
+        name: 'second_name',
+        type: 'text',
+        events: {
+          focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+          blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        },
+      }),
+      inputPhone: new Input({
+        placeholder: 'Телефон',
+        name: 'phone',
+        type: 'tel',
+        events: {
+          focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+          blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        },
+      }),
+      inputPass: new Input({
+        placeholder: 'Пароль',
+        name: 'password',
+        type: 'password',
+        events: {
+          focus: (e) => (isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+          blur: (e) => (!isValid(e.target.name, e.target.value) ? showMessage(e.target) : hideMessage(e.target)),
+        },
+      }),
+      inputPassRpt: new Input({
+        placeholder: 'Пароль (еще раз)',
+        name: 'passwordrpt',
+        type: 'password',
+      }),
+      button: new Button({
+        label: 'Зарегистрироваться',
+        type: 'submit',
+      }),
+      events: {
+        submit: (e) => {
+          e.preventDefault();
+          const data = formValidation(e.target) as SignupData
+          AuthController.signup(data)
+        },
+      },
+    });
+  }
+  render() {
+    return this.compile(tpl, { ...this.props, styles })
+  }
+}

@@ -3,8 +3,8 @@
   height: 40px;
   border: none;
   border-radius: 8px;
-  background: #3369f3;
-  color: aliceblue;
+  background: var(--bg-blue-color);
+  color: var(--white-color);
 }
 
 .button_round {
@@ -14,6 +14,17 @@
   border: none;
   text-align: center;
   line-height: 2;
-  background: #3369f3;
-  color: aliceblue;
+  background: var(--bg-blue-color);
+  color: var(--white-color);
+}
+
+.button_square {
+  width: 28px;
+  height: 28px;
+  border-radius: 10%;
+  border: none;
+  text-align: center;
+  line-height: 2;
+  background: var(--bg-blue-color);
+  color: var(--white-color);
 }

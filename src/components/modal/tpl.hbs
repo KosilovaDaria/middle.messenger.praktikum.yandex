@@ -1,0 +1,40 @@
+{{!-- <div class="{{styles.wrap}}" id="modal">
+  <form id="avatarForm" class="{{styles.modal}}">
+    <h2>Загрузите файл</h2>
+    <label for="avatar" class="{{linkClass}}">Выбрать файл на компьютере</label>
+    <input id="avatar" class="{{styles.input}}" type="file" name="avatar" accept="image/*"> <input
+      class="{{buttonClass}}" type="submit" value="Поменять">
+  </form>
+</div> --}}
+
+{{!-- <div class="{{styles.overlay}}" id="modal_overlay">
+  <div class="{{styles.wrap}}">
+  <form id="avatarForm" class="{{styles.modal}}">
+    <h2>Загрузите файл</h2>
+    <label for="avatar" class="{{linkClass}}">Выбрать файл на компьютере</label>
+    <input id="avatar" class="{{styles.input}}" type="file" name="avatar" accept="image/*"> <input
+      class="{{buttonClass}}" type="submit" value="Поменять">
+  </form>
+  </div>
+  
+</div> --}}
+{{!-- {{#if isOpen}} --}}
+<div class="{{styles.overlay}} {{#if isOpen}} {{styles.show}}{{/if}}" id="{{modalId}}">
+  <div class="{{styles.wrap}}">
+    
+  <form id="{{formId}}" class="{{styles.modal}}">
+    <div class="{{styles.close}}">{{{close}}}</div>
+    <h2>{{title}}</h2>
+ 
+    {{{input}}}
+    {{{button}}}
+    {{!-- <label for="{{inputId}}" class="{{linkClass}}">{{label}}</label>
+    <input id="{{inputId}}" class="{{styles.input}}" type="{{type}}" name="{{name}}" accept="image/*"> 
+    <input class="{{buttonClass}}" type="submit" value="{{value}}"> --}}
+  </form>
+  </div>
+  {{!-- {{else}} --}}
+  {{!-- <div></div> --}}
+</div>
+{{!-- {{/if}} --}}
+

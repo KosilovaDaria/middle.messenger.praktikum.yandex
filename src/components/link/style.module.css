@@ -1,16 +1,20 @@
 .link_block {
   padding: 10px 0;
-  color: #3369f3;
+  color: var(--bg-blue-color);
+  cursor: pointer;
 }
 
 .link_controls {
   width: 100%;
-  color: #3369f3;
-  border-bottom: 1px solid #eaeaea;
+  color: var(--bg-blue-color);
+  border-bottom: 1px solid var(--bg-gray-color);
   padding: 10px 0;
+  cursor: pointer;
 }
 
+.link_delete,
 .link_controls:nth-child(3n) {
-  color: red;
+  color: var(--red-color);
   border-bottom: none;
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-const enum METHOD {
+export enum METHOD {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -9,12 +9,9 @@ const enum METHOD {
 type Options = {
   method: METHOD;
   data?: any;
-  headers?: Record<string, string>;
+  headers?: any,
   timeout?: number;
 };
-
-type OptionsWithoutMethod = Omit<Options, 'method'>;
-
 function queryStringify(data: Record<string, string | number>) {
   let string = '?';
   const keys = Object.keys(data);
@@ -27,39 +24,61 @@ function queryStringify(data: Record<string, string | number>) {
 }
 
 export default class HTTPTransport {
-  get = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.GET }, options.timeout);
+  static API_URL = 'https://ya-praktikum.tech/api/v2';
+  protected endpoint: string;
 
-  post = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.POST }, options.timeout);
+  constructor(endpoint: string) {
+    this.endpoint = `${HTTPTransport.API_URL}${endpoint}`
+  }
+  public get<TResponse>(path = '/'): Promise<TResponse> {
+    return this.request(this.endpoint + path);
+  }
 
-  put = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.PUT }, options.timeout);
+  public post<TResponse = void>(path: string, data?: unknown): Promise<TResponse> {
+    return this.request(this.endpoint + path, {
+      method: METHOD.POST,
+      data,
+    });
+  }
 
-  delete = (url: string, options: OptionsWithoutMethod = {}) => this.request(url, { ...options, method: METHOD.DELETE }, options.timeout);
+  public put<TResponse = void>(path: string, data: unknown): Promise<TResponse> {
+    return this.request(this.endpoint + path, {
+      method: METHOD.PUT,
+      data,
+    });
+  }
 
-  request = (url: string, options: Options, timeout: number = 5000): Promise<XMLHttpRequest> => {
-    const { headers = {}, data = {}, method } = options;
+  public delete<TResponse>(path: string, data: unknown): Promise<TResponse> {
+    return this.request(this.endpoint + path, {
+      method: METHOD.DELETE,
+      data,
+    });
+  }
+
+  private request<TResponse>(url: string, options: Options = { method: METHOD.GET }): Promise<TResponse> {
+    const { headers, data, method } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
 
-      xhr.ontimeout = function () {
-        reject(xhr);
-      }
-
+      // xhr.open(method, url);
       if (method === METHOD.GET && data) {
         xhr.open(method, url + queryStringify(data));
       } else {
         xhr.open(method, url);
       }
 
-      Object.keys(headers).forEach((key) => {
-        xhr.setRequestHeader(key, headers[key]);
-      });
-
-      xhr.timeout = timeout;
+      // xhr.setRequestHeader('Content-Type', 'application/json')
+      // Object.keys(headers).forEach((key) => {
+      //   xhr.setRequestHeader(key, headers[key]);
+      // });
 
       xhr.onload = function () {
-        resolve(xhr);
+        resolve(xhr.response);
       };
+      xhr.ontimeout = function () {
+        reject(xhr.response);
+      }
 
       const handleError = (err: any) => {
         console.log('handleError')
@@ -68,13 +87,28 @@ export default class HTTPTransport {
 
       xhr.onabort = handleError;
       xhr.onerror = handleError;
+      if (!headers) {
+        if (url.includes('avatar') === false) {
+          xhr.setRequestHeader('Content-Type', 'application/json');
+        }
+      } else {
+        Object.keys(headers).forEach(key => {
+          xhr.setRequestHeader(key, headers[key]);
+        });
+      }
+
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
 
       if (method === METHOD.GET || !data) {
         xhr.send();
+      } else if (data instanceof FormData) {
+        console.log(data)
+        xhr.send(data);
       } else {
-        console.log('else')
+        console.log(data)
         xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }
