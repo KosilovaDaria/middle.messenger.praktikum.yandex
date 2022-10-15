@@ -1,8 +1,8 @@
 import API, { UserApi, UserData, UserPassword } from '../api/UserApi';
-import Router from '../utils/Router';
+import router from '../utils/Router';
 import store from '../utils/Store';
 
-const router = new Router('.app');
+// const router = new Router('.app');
 
 class UserController {
   private readonly api: UserApi;
