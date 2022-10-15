@@ -1,10 +1,10 @@
 import { expect } from 'chai';
+// @ts-ignore
 import sinon from 'sinon';
 import Router from './Router';
 
 const router = new Router('.app')
-describe.only('Router', () => {
-  console.log('here')
+describe('Router', () => {
   global.window.history.back = () => {
     if (typeof window.onpopstate === 'function') {
       window.onpopstate({ currentTarget: window } as unknown as PopStateEvent);
