@@ -14,6 +14,7 @@ const config = {
         open: true,
         host: 'localhost',
         port: 3000,
+        historyApiFallback: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -36,7 +37,13 @@ const config = {
             },
             {
                 test: /\.css$/i,
-                use: ['style-loader', {loader: 'css-loader', options: {modules: false, importLoaders: 1}}, 'postcss-loader'],
+                use: [
+                    'style-loader', 
+                    {
+                        loader: 'css-loader', 
+                        options: {modules: true, importLoaders: 1}
+                    }, 
+                    'postcss-loader'],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,

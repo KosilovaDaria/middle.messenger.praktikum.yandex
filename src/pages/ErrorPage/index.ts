@@ -1,11 +1,11 @@
 // eslint-disable-next-line max-classes-per-file
 import Link from '../../components/link/Link';
-import * as styleLink from '../../components/link/style.module.css';
+import styleLink from '../../components/link/style.module.css';
 
 import Router from '../../utils/Router';
 import Block from '../../utils/Block';
 import tpl from '../../layout/error/tpl.hbs';
-import * as styles from '../../layout/error/style.module.css';
+import styles from '../../layout/error/style.module.css';
 
 const router = new Router('.app');
 

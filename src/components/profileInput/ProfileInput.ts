@@ -1,7 +1,7 @@
 import Block from '../../utils/Block';
 import Input from '../input/Input';
 import tpl from './tpl.hbs';
-import * as styles from './style.module.css';
+import styles from './style.module.css';
 
 type ProfileInputProps = {
   label: string,
