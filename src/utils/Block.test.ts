@@ -1,11 +1,11 @@
 // eslint-disable-next-line max-classes-per-file
 import { expect } from 'chai';
-// @ts-ignore
-import proxyquire from 'proxyquire';
-// @ts-ignore
-import sinon from 'sinon';
-import type BlockType from './Block'
+import type BlockType from './Block';
 
+const sinon = require('sinon');
+const proxyquire = require('proxyquire');
+
+// console.log(sinon)
 const eventBusMock = {
   on: sinon.fake(),
   emit: sinon.fake(),

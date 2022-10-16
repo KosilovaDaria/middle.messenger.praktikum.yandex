@@ -1,7 +1,9 @@
 import { expect } from 'chai';
-// @ts-ignore
-import sinon from 'sinon';
 import Router from './Router';
+
+const sinon = require('sinon');
+
+// import sinon from 'sinon';
 
 const router = new Router('.app')
 describe('Router', () => {
