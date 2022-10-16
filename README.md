@@ -1,20 +1,5 @@
 # 🚀 Проект первого моудуля Мессенджер
 
-This project has been created using **webpack-cli**, you can now run
-
-```
-npm run build
-```
-
-or
-
-```
-yarn build
-```
-
-to bundle your application
-Проект первого модуля "Мессенджер".
-
 Макет https://www.figma.com/file/E37Uz9BVx7CBTfwNMdPw9I/Messenger-app?node-id=0%3A1
 
 Шаблонизатор: Handlebars
