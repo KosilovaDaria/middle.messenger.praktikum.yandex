@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "My webpack project",
   "default": "src/index.ts",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test"
+    }
+  },
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "webpack --mode=production --node-env=production",
@@ -53,6 +59,7 @@
     "express-history-api-fallback": "2.2.1",
     "handlebars-loader": "1.7.2",
     "html-webpack-plugin": "5.5.0",
+    "husky": "8.0.1",
     "jsdom": "20.0.1",
     "mocha": "10.0.0",
     "parcel": "2.7.0",
