@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "My webpack project",
   "default": "src/index.ts",
-  "husky": {
-    "hooks": {
-      "pre-commit": "check",
-      "pre-push": "npm run test"
-    }
-  },
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "webpack --mode=production --node-env=production",
