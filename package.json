@@ -5,7 +5,7 @@
   "default": "src/index.ts",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "eslint",
       "pre-push": "npm run test"
     }
   },
