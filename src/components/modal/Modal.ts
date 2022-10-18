@@ -1,8 +1,8 @@
 import Block from '../../utils/Block';
 import tpl from './tpl.hbs';
-import * as styles from './style.module.css';
-import * as styleButton from '../button/style.module.css';
-import * as styleLink from '../link/style.module.css';
+import styles from './style.module.css';
+import styleButton from '../button/style.module.css';
+import styleLink from '../link/style.module.css';
 import Button from '../button/Button';
 import Input from '../input/Input';
 

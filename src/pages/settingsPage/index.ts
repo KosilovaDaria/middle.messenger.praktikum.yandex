@@ -1,11 +1,11 @@
 import Block from '../../utils/Block';
 import tpl from '../../layout/profile/tpl.hbs';
-import * as styles from '../../layout/profile/style.module.css';
-import * as styleAvatar from '../../components/avatar/style.module.css';
-import * as styleForm from '../../components/form/style.module.css';
-import * as styleInput from '../../components/input/style.module.css';
-import * as styleInputProfile from '../../components/profileInput/style.module.css';
-import * as styleButton from '../../components/button/style.module.css';
+import styles from '../../layout/profile/style.module.css';
+import styleAvatar from '../../components/avatar/style.module.css';
+import styleForm from '../../components/form/style.module.css';
+import styleInput from '../../components/input/style.module.css';
+import styleInputProfile from '../../components/profileInput/style.module.css';
+import styleButton from '../../components/button/style.module.css';
 import Form from '../../components/form/Form';
 import Avatar from '../../components/avatar/Avatar';
 import ProfileInput from '../../components/profileInput/ProfileInput';

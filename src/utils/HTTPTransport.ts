@@ -68,11 +68,6 @@ export default class HTTPTransport {
         xhr.open(method, url);
       }
 
-      // xhr.setRequestHeader('Content-Type', 'application/json')
-      // Object.keys(headers).forEach((key) => {
-      //   xhr.setRequestHeader(key, headers[key]);
-      // });
-
       xhr.onload = function () {
         resolve(xhr.response);
       };

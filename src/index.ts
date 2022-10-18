@@ -7,6 +7,7 @@ import ChatPage from './pages/chatPage/index';
 import { ErrorPage, ServerErrorPage } from './pages/ErrorPage/index';
 import Router from './utils/Router';
 import AuthController from './controllers/AuthController';
+import './style.css';
 
 const router = new Router('.app');
 
@@ -39,7 +40,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   switch (window.location.pathname) {
     case Routes.Index:
     case Routes.Signup:
-      isProtectedRoute = true;
+      isProtectedRoute = false;
       break;
   }
   try {
