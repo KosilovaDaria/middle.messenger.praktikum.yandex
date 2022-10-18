@@ -1,5 +1,55 @@
-import Block from './Block'; // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
-import Route from './Route';
+/* eslint-disable max-classes-per-file */
+import Block from './Block';
+
+function isEqual(lhs: any, rhs: any) {
+  return lhs === rhs;
+}
+function render(query: string, block: Block) {
+  const root = document.querySelector(query);
+
+  if (root === null) {
+    throw new Error(`root not found by selector "${query}"`);
+  }
+  root.innerHTML = '';
+  root.append(block.getContent()!);
+  return root;
+}
+
+class Route {
+  _pathname: string;
+  _blockClass: new () => Block;
+
+  _block: Block | null;
+  _props: any;
+  constructor(pathname: string, view: new () => any, props: { rootQuery: string; }) {
+    this._pathname = pathname;
+    this._blockClass = view;
+    this._block = null;
+    this._props = props;
+  }
+
+  navigate(pathname: string) {
+    if (this.match(pathname)) {
+      this._pathname = pathname;
+      this.render();
+    }
+  }
+
+  leave() {
+    this._block = null
+  }
+
+  match(pathname: string) {
+    return isEqual(pathname, this._pathname);
+  }
+
+  render() {
+    if (!this._block) {
+      this._block = new this._blockClass();
+      render(this._props.rootQuery, this._block!)
+    }
+  }
+}
 
 export default class Router {
   static __instance: Router;
@@ -20,9 +70,7 @@ export default class Router {
     Router.__instance = this;
   }
 
-  // public use(pathname: string, block: any) {
-  use(pathname: string, block: new() => Block) {
-  //  если передавать в индексе конструктор, а не объект
+  use(pathname: string, block: new () => Block) {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;

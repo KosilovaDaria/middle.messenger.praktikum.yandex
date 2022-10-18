@@ -15,7 +15,7 @@ main {
   height: 100vh;
 }
 
-.app {
+:global(.app) {
   --white-color: #fff;
   --red-color: red;
   --bg-gray-color: #efefef;
@@ -25,7 +25,7 @@ main {
   --overlay-color: rgba(0 0 0 / 50%);
 }
 
-.visually_hidden {
+:global(.visually_hidden) {
   position: absolute;
   clip: rect(0 0 0 0);
   width: 1px;

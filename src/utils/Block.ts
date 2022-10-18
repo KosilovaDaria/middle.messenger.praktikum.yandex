@@ -11,7 +11,7 @@ export default class Block<P extends Record<string, any> = any > {
   } as const;
 
   public _id = makeUUID();
-  protected props: P;
+  public props: P;
   public children: Record<string, any | any[]>;
   private eventBus: () => EventBus;
   protected _element: HTMLElement | null = null;

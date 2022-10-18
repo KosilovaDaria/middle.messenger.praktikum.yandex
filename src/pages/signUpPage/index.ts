@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import tpl from '../../layout/auth/tpl.hbs';
-import * as styles from '../../layout/auth/style.module.css';
+import styles from '../../layout/auth/style.module.css';
 import Form from '../../components/form/Form';
 import Input from '../../components/input/Input';
 import Button from '../../components/button/Button';

@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import * as styles from './style.module.css';
+import styles from './style.module.css';
 import tpl from './tpl.hbs';
 
 type InputProps = {

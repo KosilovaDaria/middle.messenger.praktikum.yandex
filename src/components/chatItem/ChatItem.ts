@@ -1,6 +1,6 @@
 import Block from '../../utils/Block';
 import tpl from './tpl.hbs';
-import * as styles from './style.module.css';
+import styles from './style.module.css';
 import { withStore } from '../../utils/Store';
 import { ChatInfo } from '../../api/ChatApi';
 import { User } from '../../api/AuthApi';
