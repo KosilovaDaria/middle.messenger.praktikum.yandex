@@ -25,11 +25,21 @@ describe('HTTPTransport', () => {
     requests.length = 0;
   })
 
-  it('.get() should send GET request', () => {
+  it('.get() should send Get request', () => {
     instance.get('/user');
 
     const [request] = requests;
 
     expect(request.method).to.eq('GET');
+  });
+
+  it('.post() should send Post request', async () => {
+    const promise = instance.post('/signin');
+
+    const [request] = requests;
+    request.respond(200, {}, '[{ "id": 123, "username": "Petya" }]');
+
+    const result = await promise;
+    expect(result).to.deep.eq([{ id: 123, username: 'Petya' }]);
   });
 });
