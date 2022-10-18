@@ -3,8 +3,6 @@ import Router from './Router';
 
 const sinon = require('sinon');
 
-// import sinon from 'sinon';
-
 const router = new Router('.app')
 describe('Router', () => {
   global.window.history.back = () => {

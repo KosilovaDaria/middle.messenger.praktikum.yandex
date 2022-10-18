@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import Block from './Block'; // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
+import Block from './Block';
 
 function isEqual(lhs: any, rhs: any) {
   return lhs === rhs;
@@ -18,15 +18,10 @@ function render(query: string, block: Block) {
 class Route {
   _pathname: string;
   _blockClass: new () => Block;
-  // если передавать в индексе конструктор, а не объект
-  // _blockClass: any;
 
   _block: Block | null;
-  // _props: { rootQuery: string; };
   _props: any;
-  // constructor(pathname: string, view: any, props: { rootQuery: string; }) {
   constructor(pathname: string, view: new () => any, props: { rootQuery: string; }) {
-    // если передавать в индексе конструктор, а не объект
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
@@ -50,9 +45,7 @@ class Route {
 
   render() {
     if (!this._block) {
-      // this._block = this._blockClass;
       this._block = new this._blockClass();
-      // use(pathname: string, block: new() => Block) { //если передавать в индексе конструктор, а не объект
       render(this._props.rootQuery, this._block!)
     }
   }
@@ -77,9 +70,7 @@ export default class Router {
     Router.__instance = this;
   }
 
-  // public use(pathname: string, block: any) {
   use(pathname: string, block: new () => Block) {
-    //  если передавать в индексе конструктор, а не объект
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;
@@ -122,5 +113,3 @@ export default class Router {
     return this.routes.find((route: any) => route.match(pathname));
   }
 }
-// const router = new Router('.app')
-// export default router;

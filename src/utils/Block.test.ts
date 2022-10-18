@@ -5,7 +5,6 @@ import type BlockType from './Block';
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 
-// console.log(sinon)
 const eventBusMock = {
   on: sinon.fake(),
   emit: sinon.fake(),
